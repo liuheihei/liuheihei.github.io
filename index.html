@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://liuheihei.github.io/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liuheihei.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="lvs-lvs工作模式理解" class="article article-type-lvs" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/29/lvs工作模式理解/" class="article-date">
+  <time datetime="2016-12-29T10:21:05.000Z" itemprop="datePublished">2016-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/29/lvs工作模式理解/">LVS 工作模式理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><html></html></p>
+<p><head></head></p>
+<p><title>2016-12-11-lvs</title></p>
+<p><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></p>
+<p><style type="text/css"><br>/<em> GitHub stylesheet for MarkdownPad (<a href="http://markdownpad.com">http://markdownpad.com</a>) </em>/<br>/<em> Author: Nicolas Hery - <a href="http://nicolashery.com">http://nicolashery.com</a> </em>/<br>/<em> Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff </em>/<br>/<em> Source: <a href="https://github.com/nicolahery/markdownpad-github">https://github.com/nicolahery/markdownpad-github</a> </em>/</p>
+<p>/<em> RESET<br>=============================================================================</em>/</p>
+<p>html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {<br>  margin: 0;<br>  padding: 0;<br>  border: 0;<br>}</p>
+<p>/<em> BODY<br>=============================================================================</em>/</p>
+<p>body {<br>  font-family: Helvetica, arial, freesans, clean, sans-serif;<br>  font-size: 14px;<br>  line-height: 1.6;<br>  color: #333;<br>  background-color: #fff;<br>  padding: 20px;<br>  max-width: 960px;<br>  margin: 0 auto;<br>}</p>
+<p>body&gt;*:first-child {<br>  margin-top: 0 !important;<br>}</p>
+<p>body&gt;*:last-child {<br>  margin-bottom: 0 !important;<br>}</p>
+<p>/<em> BLOCKS<br>=============================================================================</em>/</p>
+<p>p, blockquote, ul, ol, dl, table, pre {<br>  margin: 15px 0;<br>}</p>
+<p>/<em> HEADERS<br>=============================================================================</em>/</p>
+<p>h1, h2, h3, h4, h5, h6 {<br>  margin: 20px 0 10px;<br>  padding: 0;<br>  font-weight: bold;<br>  -webkit-font-smoothing: antialiased;<br>}</p>
+<p>h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {<br>  font-size: inherit;<br>}</p>
+<p>h1 {<br>  font-size: 28px;<br>  color: #000;<br>}</p>
+<p>h2 {<br>  font-size: 24px;<br>  border-bottom: 1px solid #ccc;<br>  color: #000;<br>}</p>
+<p>h3 {<br>  font-size: 18px;<br>}</p>
+<p>h4 {<br>  font-size: 16px;<br>}</p>
+<p>h5 {<br>  font-size: 14px;<br>}</p>
+<p>h6 {<br>  color: #777;<br>  font-size: 14px;<br>}</p>
+<p>body&gt;h2:first-child, body&gt;h1:first-child, body&gt;h1:first-child+h2, body&gt;h3:first-child, body&gt;h4:first-child, body&gt;h5:first-child, body&gt;h6:first-child {<br>  margin-top: 0;<br>  padding-top: 0;<br>}</p>
+<p>a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {<br>  margin-top: 0;<br>  padding-top: 0;<br>}</p>
+<p>h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {<br>  margin-top: 10px;<br>}</p>
+<p>/<em> LINKS<br>=============================================================================</em>/</p>
+<p>a {<br>  color: #4183C4;<br>  text-decoration: none;<br>}</p>
+<p>a:hover {<br>  text-decoration: underline;<br>}</p>
+<p>/<em> LISTS<br>=============================================================================</em>/</p>
+<p>ul, ol {<br>  padding-left: 30px;<br>}</p>
+<p>ul li &gt; :first-child,<br>ol li &gt; :first-child,<br>ul li ul:first-of-type,<br>ol li ol:first-of-type,<br>ul li ol:first-of-type,<br>ol li ul:first-of-type {<br>  margin-top: 0px;<br>}</p>
+<p>ul ul, ul ol, ol ol, ol ul {<br>  margin-bottom: 0;<br>}</p>
+<p>dl {<br>  padding: 0;<br>}</p>
+<p>dl dt {<br>  font-size: 14px;<br>  font-weight: bold;<br>  font-style: italic;<br>  padding: 0;<br>  margin: 15px 0 5px;<br>}</p>
+<p>dl dt:first-child {<br>  padding: 0;<br>}</p>
+<p>dl dt&gt;:first-child {<br>  margin-top: 0px;<br>}</p>
+<p>dl dt&gt;:last-child {<br>  margin-bottom: 0px;<br>}</p>
+<p>dl dd {<br>  margin: 0 0 15px;<br>  padding: 0 15px;<br>}</p>
+<p>dl dd&gt;:first-child {<br>  margin-top: 0px;<br>}</p>
+<p>dl dd&gt;:last-child {<br>  margin-bottom: 0px;<br>}</p>
+<p>/<em> CODE<br>=============================================================================</em>/</p>
+<p>pre, code, tt {<br>  font-size: 12px;<br>  font-family: Consolas, “Liberation Mono”, Courier, monospace;<br>}</p>
+<p>code, tt {<br>  margin: 0 0px;<br>  padding: 0px 0px;<br>  white-space: nowrap;<br>  border: 1px solid #eaeaea;<br>  background-color: #f8f8f8;<br>  border-radius: 3px;<br>}</p>
+<p>pre&gt;code {<br>  margin: 0;<br>  padding: 0;<br>  white-space: pre;<br>  border: none;<br>  background: transparent;<br>}</p>
+<p>pre {<br>  background-color: #f8f8f8;<br>  border: 1px solid #ccc;<br>  font-size: 13px;<br>  line-height: 19px;<br>  overflow: auto;<br>  padding: 6px 10px;<br>  border-radius: 3px;<br>}</p>
+<p>pre code, pre tt {<br>  background-color: transparent;<br>  border: none;<br>}</p>
+<p>kbd {<br>    -moz-border-bottom-colors: none;<br>    -moz-border-left-colors: none;<br>    -moz-border-right-colors: none;<br>    -moz-border-top-colors: none;<br>    background-color: #DDDDDD;<br>    background-image: linear-gradient(#F1F1F1, #DDDDDD);<br>    background-repeat: repeat-x;<br>    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;<br>    border-image: none;<br>    border-radius: 2px 2px 2px 2px;<br>    border-style: solid;<br>    border-width: 1px;<br>    font-family: “Helvetica Neue”,Helvetica,Arial,sans-serif;<br>    line-height: 10px;<br>    padding: 1px 4px;<br>}</p>
+<p>/<em> QUOTES<br>=============================================================================</em>/</p>
+<p>blockquote {<br>  border-left: 4px solid #DDD;<br>  padding: 0 15px;<br>  color: #777;<br>}</p>
+<p>blockquote&gt;:first-child {<br>  margin-top: 0px;<br>}</p>
+<p>blockquote&gt;:last-child {<br>  margin-bottom: 0px;<br>}</p>
+<p>/<em> HORIZONTAL RULES<br>=============================================================================</em>/</p>
+<p>hr {<br>  clear: both;<br>  margin: 15px 0;<br>  height: 0px;<br>  overflow: hidden;<br>  border: none;<br>  background: transparent;<br>  border-bottom: 4px solid #ddd;<br>  padding: 0;<br>}</p>
+<p>/<em> TABLES<br>=============================================================================</em>/</p>
+<p>table th {<br>  font-weight: bold;<br>}</p>
+<p>table th, table td {<br>  border: 1px solid #ccc;<br>  padding: 6px 13px;<br>}</p>
+<p>table tr {<br>  border-top: 1px solid #ccc;<br>  background-color: #fff;<br>}</p>
+<p>table tr:nth-child(2n) {<br>  background-color: #f8f8f8;<br>}</p>
+<p>/<em> IMAGES<br>=============================================================================</em>/</p>
+<p>img {<br>  max-width: 100%<br>}<br></style><br></p>
+<p><body></body></p>
+<p></p><h3>NAT网络地址转换</h3><p></p>
+<p></p><h5>工作流程</h5><p></p>
+<pre><code>1.client访问vip.
+2.vip将tcp包中的目的地址根据分发策略改变成realserver的ip地址以及端口
+    （此时包的源地址为客户端ip地址，目的地址为realserver地址如果需
+    要配置iptables需要注意此时包源地址不是lvs的地址所以realserver
+    中对应的端口需要开放给所有人）
+    (lvs会在自己的应用池里面记录每个包所修改的ip,用于记录当这个包返回时修改为原来的状态)
+3.realserver获取到tcp包之后将返回给负载均衡器。
+    （出去面试的时候有被问到这个包是怎么回的负载均衡器，需要将realserver的网关指向lvs）
+    （此时返回的包源地址为realserver地址，目的地址为客户端地址）
+4.vip获取到返回的tcp包之后，修改这个包中的源地址。将realserver的地址转换为vip的地址。
+5.客户端收到服务器发回的包。
+</code></pre>
+
+<p></p><h3>DR模式</h3><p></p>
+<p></p><h5>工作流程</h5><p></p>
+<pre><code>1.client访问vip
+2.vip将tcp包中目的mac地址修改为realserver的mac地址并在局域网内广播。
+3.realerver收到广播处理包在将tcp包返回给客户端
+</code></pre>
+
+<p></p><h3>隧道模式</h3><p></p>
+<p></p><h5>工作流程</h5><p></p>
+<pre><code>1.client访问vip
+2.vip将tcp包再次封装并发送给realserver，
+3.realerver收到包后打开封装，发现里面的目的ip就是自己，处理完之后直接发送给客户端。
+确实没太理解
+</code></pre>
+
+<p></p><h3>调度算法</h3><p></p>
+<p></p><h5>轮叫调度（Round-Robin）</h5><p></p>
+<pre><code>不管服务器当前的连接数和相应速度，所有请求平均分配
+</code></pre>
+
+<p></p><h5>加权轮叫调度（weighted Round-Robin）</h5><p></p>
+<pre><code>根据对应的权重表示服务器的处理性能，权重高的优先处理更多的请求
+</code></pre>
+
+<p></p><h5>最小链接数调度（Least-connection）</h5><p></p>
+<pre><code>把新请求分配到当前连接数最小的服务器，它通过服务器当前活跃的连接数来估计服务器的负载情况。
+</code></pre>
+
+<p></p><h5>加权最小链接调度（Weighted Least-Connection）</h5><p></p>
+<pre><code>把新请求分配给 当前连接数除以权重值最小的服务器，
+</code></pre>
+
+<p></p><h5>基于局部的最少链接调度（Locality-Based Least Connections ）</h5><p></p>
+<pre><code>根据目标ip地址找出目标ip地址最近使用过的服务器，
+若1.该服务器存活. 
+2该服务器没有超载并且没有其他服务器负载小于该服务器二分之一
+则选择该服务器，否则选择一个新的服务器处理该请求
+</code></pre>
+
+<p></p><h5>带复制的基于局部性最小链接调度（Locality-Based Least Connections with Replication Scheduling）</h5><p></p>
+<pre><code>根据请求目标的IP地址找到对应的服务器组，根据最小链接的原则选择一个服务器组中的服务器，
+若服务器没有超载，则将该请求发送到该服务器，若服务器超载则从整个集群中选出一台服务器，
+将该服务器加入到服务器组中，并发送请求到该服务器，同时如果服务器组有一段时间没有被修
+改（大于设定值）将最忙的服务器从服务器组中剔除，以降低复制的程度。
+（cdn可能用处比较多）
+</code></pre>
+
+<p></p><h5>目标地址散列调度（Destination Hashing Scheduling）</h5><p></p>
+<p></p><h5>源地址散列调度（Source Hashing Scheduling）</h5><p></p>
+<pre><code>(没太看懂 网站说防火墙集群应用比较多)
+</code></pre>
+
+<p></p><h5>动态反馈负载均衡算法</h5><p></p>
+<p></p><p><a href="http://www.linuxvirtualserver.org/zh/" target="_blank" rel="external">LVS中文官网</a><br></p><p></p>
+<p></p><h3>问题：</h3><p></p>
+<pre><code>1.面试的过程中有被问到，当一个dr模式的lvs依然承受不了压力的时候，怎么办？
+我的回答：使用智能dns，将不同区域的请求均衡到不同的lvs机器中去
+不过面试官给出的答案是：在交换机层面做什么东西。不过没有细讲解
+
+2.面试过程中问的较多的就是三种工作模式的原理以及每个包到每个服务器时 这个包的目的地址，目的端口，源地址，源端口，以DR、NAT模式居多，这个过程一定要熟悉。
+</code></pre>
+
+
+<p><br><br><!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) --></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liuheihei.github.io/2016/12/29/lvs工作模式理解/" data-id="cixa938b600001hgviot61fo5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lvs/">lvs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="python-python学习笔记-md" class="article article-type-python" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/29/python学习笔记-md/" class="article-date">
+  <time datetime="2016-12-29T10:13:07.000Z" itemprop="datePublished">2016-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/29/python学习笔记-md/">python学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一课-基本语法"><a href="#第一课-基本语法" class="headerlink" title="第一课  基本语法"></a>第一课  基本语法</h2><h2 id="第二课-函数"><a href="#第二课-函数" class="headerlink" title="第二课  函数"></a>第二课  函数</h2><p>python中的def语句实际上是一个可执行语句：当它运行时创建一个新的函数对象并将其赋值给一个变量名（函数名）。</p>
+<p>def只有在运行时才会进行评估，而在def之中的代码在函数调用时才会评估。也就是当函数没有被调用时，函数中的代码将被忽略。</p>
+<p><strong> 问题：下列关于函数的写法中，各有什么区别？</strong></p>
+<pre><code>def test_fun():
+    print(&quot;test&quot;)
+
+test_fun
+test_fun()
+print(test_fun)
+print(test_fun())
+</code></pre><p>答：在python中函数也是一个对象，如果不加括号，指的是函数本身，而不会调用函数。test_fun()才是调用函数，所以print（test_fun）打印出来的是<function test_fun="" at="" 0x005e3348="">。而print（test_fun()）最终为什么有一个None，是因为函数没有返回值，第一个打印出来的test是由test_fun()打印出来，而print打印的应该是函数的返回值，该函数没有返回值，所以打印为none。</function></p>
+<p>##模块加载</p>
+<p>1.一个模块只能被加载一次，只加载一次可以阻止多重导入时代码被多次执行。</p>
+<p>2.模块加载时，顶层代码会自动执行，所以只将函数放入模块的顶层是良好的习惯。（顶层代码：就是main代码）</p>
+<p><strong>__name__的含义</strong></p>
+<pre><code>问题1：这么做的目的是什么？
+答：将所有的顶层代码写入一个if语句中（if __name__ == &apos;__main__&apos;:）中，实现当一个脚本被当成模块import进去的时候，顶层代码不会被执行，只执行调用的函数，而当直接执行脚本的时候脚本正常执行。
+
+问题2：\_\_name__是什么？
+答：\_\_name__是一个内置变量
+    当脚本直接被运行的时候\_\_name__ == \_\_main__。
+    当脚本被当做一个模块import进去的时候\_\_name__ == 模块名。
+
+问题3：如果脚本名字是a.py,为什么模块名是a,而不是a.py?
+答：
+
+问题4：python中常用的内置变量还有哪些经常会用到的？
+答：
+    print(vars())
+    #输出
+    # {&apos;__builtins__&apos;: &lt;module &apos;builtins&apos; (built-in)&gt;, &apos;__spec__&apos;: None, &apos;__package__&apos;: None, &apos;__doc__&apos;: None, &apos;__name__&apos;: &apos;__main__&apos;, &apos;__cached__&apos;: None, &apos;__file__&apos;: &apos;H:/py/index.py&apos;, &apos;__loader__&apos;: 
+</code></pre><h2 id="第三课-python对象"><a href="#第三课-python对象" class="headerlink" title="第三课 python对象"></a>第三课 python对象</h2><p><strong>什么是对象？</strong></p>
+<pre><code>python中一切皆对象，比如坐着的椅子是一个对象，玩的电脑是一个对象。通过描述属性（特征）和行为来描述一个对象，比如正在摇尾巴的小狗，是它的行为，他的年龄，体重是它的属性，
+
+在描述对象的时候分为两个方面：
+    1.它可以做什么（行为，在python中称之为方法）
+    2.它是什么样的（属性）
+</code></pre><p>所有的python对象都有三个特性：<strong>身份</strong>、<strong>类型</strong>、<strong>值</strong></p>
+<pre><code>身份：每个对象都有唯一的身份标示自己，任何对象都可以通过内建函数id()来得到身份。
+类型：决定了对象可以保存什么类型的值，可以进行什么样的操作，以及遵循什么样的规则使用type()来查看对象的类型。
+值：对象表示的数据项。
+</code></pre><p>使用python实现的需求</p>
+<pre><code>一、
+    1.提示用户输入一个字符串并判断该字符串是否存在，存在则提示用户再次输入，不存在则创建以这个字符串为文件名的文件。 
+    2.提示用户输入字符，每行字符先写到一个列表中。（用户输入一个回车代表循环结束）
+    3.将列表中的数据写入到用户输入的文件中。
+    （写出来后，在考虑如何当用户输入一个回车时认为是正常的回车，输入两次回车才退出）
+
+二、
+    1.通过列表构建一个后进先出的结构。
+    2.编写一个程序，用列表实现栈结构。
+    3.需要支持压栈，出栈，查询功能。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liuheihei.github.io/2016/12/29/python学习笔记-md/" data-id="cixa938bd00031hgvf51bitgi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvs/">lvs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/lvs/" style="font-size: 10px;">lvs</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/29/lvs工作模式理解/">LVS 工作模式理解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/29/python学习笔记-md/">python学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 liuheihei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
