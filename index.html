@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/01/14/Harbor-Docker-Registry-1/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/01/14/Harbor-Docker-Registry/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -281,7 +281,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/14/Harbor-Docker-Registry-1/" itemprop="url">
+                <a class="post-title-link" href="/2017/01/14/Harbor-Docker-Registry/" itemprop="url">
                   Harbor Docker Registry
                 </a>
               
@@ -309,6 +309,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -317,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/01/14/Harbor-Docker-Registry-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/14/Harbor-Docker-Registry-1/" itemprop="commentCount"></span>
+                <a href="/2017/01/14/Harbor-Docker-Registry/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/14/Harbor-Docker-Registry/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -448,34 +470,36 @@ https://docs.docker.com/engine/installation/linux/debian/
 </code></pre><p>默认会生成docker-compose<br>使用docker-compose来管理Harbor<br>如果要改变Harbor的配置，首先停掉Harbor实例，然后更新harbor.cfg，最后运行install.sh</p>
 <p><strong> 删除Harbor </strong></p>
 <pre><code>删除Harbor容器但是保存数据
-docker-compose down
+    $ docker-compose down
 </code></pre><p><strong> 删除数据 </strong></p>
-<pre><code>rm -r /data/database
-rm -r /data/registry
+<pre><code>$ rm -r /data/database
+$ rm -r /data/registry
 </code></pre><p><strong> 持久化数据、日志 </strong><br>Harbor使用rsyslog来保存日志，日志文件被存放在/var/log/harbor<br>默认registry数据持久化在主机的/data目录下，当Harbor被删除这个数据依然被保存。</p>
 <p><strong> 配置https </strong></p>
 <p>自签名证书</p>
-<pre><code>openssl req -newkey rsa:4096 -nodes -sha256 -keyout ca.key -x509 -days 365 -out ca.crt
+<pre><code>$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout ca.key -x509 -days 365 -out ca.crt
 
-openssl req -newkey rsa:4096 -nodes -sha256 -keyout sredev2.test.com.key -out sredev2.test.com.csr
+$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout sredev2.test.com.key -out sredev2.test.com.csr
 
-openssl x509 -req -days 365 -in sredev2.test.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out sredev2.test.com.crt
+$ openssl x509 -req -days 365 -in sredev2.test.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out sredev2.test.com.crt
 </code></pre><p>客户端添加信任(自签名证书会报错)</p>
 <pre><code>Linux
-mkdir /etc/docker/certs.d/sredev2.test.com -p
-cp sredev2.test.com.crt /usr/local/share/ca-certificates/sredev2.test.com.crt
-update-ca-certificates
+    $ mkdir /etc/docker/certs.d/sredev2.test.com -p
+    $ cp sredev2.test.com.crt /usr/local/share/ca-certificates/sredev2.test.com.crt
+    $ update-ca-certificates
 
 MAC 端
 将IP：port添加到preferences --&gt; advenced --&gt; inseure registries
 </code></pre><p><strong> docker login 失败：需要修改下面参数 </strong></p>
-<pre><code>sudo sysctl -w net.ipv4.tcp_mtu_probing=1
+<pre><code>$ sudo sysctl -w net.ipv4.tcp_mtu_probing=1
 
-net.ipv4.tcp_mtu_probing=1
-</code></pre><h5 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试"></a>客户端测试</h5><p>  $ docker login</p>
-<p>  $docker tag nginx:1.11.5 sredev2.test.com/test/nginx:1.11.5</p>
-<p>  $ docker push sredev2.test.com/test/nginx:1.11.5</p>
-<h5 id="推荐一篇文章-里面讲解非常详细"><a href="#推荐一篇文章-里面讲解非常详细" class="headerlink" title="推荐一篇文章 里面讲解非常详细"></a>推荐一篇文章 里面讲解非常详细</h5><p><a href="https://segmentfault.com/a/1190000007705296#articleHeader6" target="_blank" rel="external">https://segmentfault.com/a/1190000007705296#articleHeader6</a></p>
+修改sysctl.conf net.ipv4.tcp_mtu_probing=1
+</code></pre><h5 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试"></a>客户端测试</h5><pre><code>$ docker login
+
+$ docker tag nginx:1.11.5 sredev2.test.com/test/nginx:1.11.5
+
+$ docker push sredev2.test.com/test/nginx:1.11.5
+</code></pre><h5 id="推荐一篇文章-里面讲解非常详细"><a href="#推荐一篇文章-里面讲解非常详细" class="headerlink" title="推荐一篇文章 里面讲解非常详细"></a>推荐一篇文章 里面讲解非常详细</h5><p><a href="https://segmentfault.com/a/1190000007705296#articleHeader6" target="_blank" rel="external">https://segmentfault.com/a/1190000007705296#articleHeader6</a></p>
 
           
         
@@ -566,6 +590,28 @@ net.ipv4.tcp_mtu_probing=1
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -698,6 +744,28 @@ net.ipv4.tcp_mtu_probing=1
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -967,6 +1035,28 @@ net.ipv4.tcp_mtu_probing=1
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1134,6 +1224,13 @@ print(test_fun())
             </div>
           
 
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
