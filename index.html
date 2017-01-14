@@ -256,6 +256,264 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/01/14/Harbor-Docker-Registry-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="liuheihei">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/14/Harbor-Docker-Registry-1/" itemprop="url">
+                  Harbor Docker Registry
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2017-01-14T18:55:43+08:00">
+                2017-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/14/Harbor-Docker-Registry-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/14/Harbor-Docker-Registry-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Docker-Harbor-Registry-使用"><a href="#Docker-Harbor-Registry-使用" class="headerlink" title="Docker Harbor Registry 使用"></a>Docker Harbor Registry 使用</h2><h3 id="官网介绍："><a href="#官网介绍：" class="headerlink" title="官网介绍："></a>官网介绍：</h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><pre><code>1.使用Harbor管理项目
+2.管理项目中的成员
+3.复制到一个其他到Registry
+4.搜索工程和源
+5.管理Harbor系统
+  管理用户
+  管理副本的地址
+  管理复制策略
+6.使用docker client pull和push镜像
+7.删除源和镜像
+</code></pre><h5 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h5><pre><code>项目级别
+Guest：Guest指定的项目只有只读的权限
+Developer：指定的项目有读写的权限
+ProjectAdmin：当新创建项目的时候，应该指定一个“ProjectAdmin”用户
+    该用户有读写权限，也能进行权限管理例如添加或者删除成员
+系统级别
+SysAdmin：拥有最高权限，可以设置一个用户作为管理员，共有的项目“library”
+Anonymous: 当一个用户没有登陆的时候，没有权限访问私有项目，但是有公有项目的读权限。
+</code></pre><h5 id="用户认证："><a href="#用户认证：" class="headerlink" title="用户认证："></a>用户认证：</h5><pre><code>一、数据库
+  在这个模式下用户可以自注册（可以关闭）
+  关闭的时候只有系统管理员可以添加用户，用户名和邮箱地址必须相同。
+
+二、LDAP
+</code></pre><h5 id="管理项目"><a href="#管理项目" class="headerlink" title="管理项目"></a>管理项目</h5><p>一个Harbor项目包含一个应用的所有的repo，在这个项目创建之前不能push镜像，RBAC应用在项目中<br>Harbor中有两种项目类型。</p>
+<pre><code>一、public
+  所有的用户有读权限，当你想分享给其他人的时候有用。
+二、private
+  只能登陆之后才有访问权限。
+</code></pre><p>所有的日志可以在“logs”按钮中列出，可以通过用户名，操作来过滤。</p>
+<h5 id="管理项目中的成员"><a href="#管理项目中的成员" class="headerlink" title="管理项目中的成员"></a>管理项目中的成员</h5><pre><code>添加成员
+更新和删除成员
+</code></pre><h5 id="复制image"><a href="#复制image" class="headerlink" title="复制image"></a>复制image</h5><p>该功能被用于从一个Harbor实例复制到另一个实例。</p>
+<p>复制的函数是“project-oriented”,一旦系统用户设置了一个policy到另一个项目，这个项目下的所有repo都会被复制到远端的registry。每一个repo都会启动一个job来运行复制，如果这个项目在远端registry不存在就会自动创建一个，如果已经存在，但是配置的用户没有写权限，就会失败，当一个新的repo在这个项目中创建，相同的操作也会在远端的registry，删除操作也一样，但是用户信息不会被复制过去。</p>
+<p>由于网络的原因，在复制的过程中可能有延时，如果由于网络原因复制失败复制进程在几分钟之后会重试。</p>
+<p>一个0.3.5之前的版本不能跟0.3.5之后的版本进行同步</p>
+<h5 id="管理员选项"><a href="#管理员选项" class="headerlink" title="管理员选项"></a>管理员选项</h5><h6 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h6><h6 id="管理Destination（不理解）"><a href="#管理Destination（不理解）" class="headerlink" title="管理Destination（不理解）"></a>管理Destination（不理解）</h6><h6 id="管理replication"><a href="#管理replication" class="headerlink" title="管理replication"></a>管理replication</h6><pre><code>注意在修改replication的时候需要停止这个policy
+</code></pre><h4 id="如何使用-docker-client-进行pull-and-push"><a href="#如何使用-docker-client-进行pull-and-push" class="headerlink" title="如何使用 docker client 进行pull and push"></a>如何使用 docker client 进行pull and push</h4><p>Harbor只支持registry v2 所以docker client版本需要高于1.6.0</p>
+<p>Harbor 支持HTTP，但是默认docker client会优先尝试HTTPS，如果私有registry使用HTTP或者使用一个未知CA的HTTPS，需要在docker client中添加一行 <code>--insecure-registry myregistrydomain.com:5000</code>如果使用HTTPS只需要简单的将证书存放在/etc/docker/certs.d/myregistrydomain.com:5000/ca.crt中</p>
+<p><strong> 使用docker client push image 过程</strong></p>
+<p>1.登陆</p>
+<pre><code>$ docker login {{  ip  }}
+</code></pre><p>2.标记image</p>
+<pre><code>$ docker tag ubuntu:14.04 {{  ip  }}/demo/ubuntu:14.04
+</code></pre><p>3.push image</p>
+<pre><code>$ docker push {{  ip  }}/demo/ubuntu:14.04
+</code></pre><h2 id="Harbor-安装文档"><a href="#Harbor-安装文档" class="headerlink" title="Harbor 安装文档"></a>Harbor 安装文档</h2><p>下载在线安装包</p>
+<pre><code>https://github.com/vmware/harbor/releases
+</code></pre><p>修改配置harbor.cfg</p>
+<pre><code>1.hostname (可以是IP或者FQDN)
+2.ui_url_protocol (HTTP or HTTPS)
+3.email settings (用于发送用户重置密码邮件)
+4.Harbor_admin_password (管理员登陆密码)
+5.auth_mode (设置为mysql或者LDAP)
+6.db_password (mysql password)
+7.self_registration (自注册yes or no)
+8.max_job_workers (最大replication job数量)
+9.token_expiration (token过期时间)
+10.verify_remote_cert (跳过证书检查，适用于自签名证书)
+11.customize_crt (自己生成证书)
+</code></pre><p>harbor.cfg</p>
+<pre><code>hostname = sredev2.test.com
+ui_url_protocol = https
+email_identity =
+email_server = smtp.sohu.com
+email_server_port = 25
+email_username = liuheihei@sohu.com
+email_password = xxxxx
+email_from = liuheihei@sohu.com
+email_ssl = false
+harbor_admin_password = xxxxxxxx
+auth_mode = db_auth
+ldap_url = ldaps://ldap.mydomain.com
+ldap_basedn = ou=people,dc=mydomain,dc=com
+ldap_uid = uid
+ldap_scope = 3
+db_password = xxxxxxx
+self_registration = off
+use_compressed_js = on
+max_job_workers = 3
+token_expiration = 30
+verify_remote_cert = on
+customize_crt = off
+crt_country = CN
+crt_state = State
+crt_location = CN
+crt_organization = organization
+crt_organizationalunit = organizational unit
+crt_commonname = example.com
+crt_email = example@example.com
+project_creation_restriction = everyone
+ssl_cert = /data/cert/sredev2.test.com.crt
+ssl_cert_key = /data/cert/sredev2.test.com.key
+</code></pre><p>数据默认存储在本地文件系统，如果要修改，配置文件在<code>common/templates/registry/config.yml</code></p>
+<p>安装需要的docker环境</p>
+<pre><code>安装docker
+
+https://docs.docker.com/engine/installation/linux/debian/
+
+安装docker-compose
+</code></pre><p>默认会生成docker-compose<br>使用docker-compose来管理Harbor<br>如果要改变Harbor的配置，首先停掉Harbor实例，然后更新harbor.cfg，最后运行install.sh</p>
+<p><strong> 删除Harbor </strong></p>
+<pre><code>删除Harbor容器但是保存数据
+docker-compose down
+</code></pre><p><strong> 删除数据 </strong></p>
+<pre><code>rm -r /data/database
+rm -r /data/registry
+</code></pre><p><strong> 持久化数据、日志 </strong><br>Harbor使用rsyslog来保存日志，日志文件被存放在/var/log/harbor<br>默认registry数据持久化在主机的/data目录下，当Harbor被删除这个数据依然被保存。</p>
+<p><strong> 配置https </strong></p>
+<p>自签名证书</p>
+<pre><code>openssl req -newkey rsa:4096 -nodes -sha256 -keyout ca.key -x509 -days 365 -out ca.crt
+
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout sredev2.test.com.key -out sredev2.test.com.csr
+
+openssl x509 -req -days 365 -in sredev2.test.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out sredev2.test.com.crt
+</code></pre><p>客户端添加信任(自签名证书会报错)</p>
+<pre><code>Linux
+mkdir /etc/docker/certs.d/sredev2.test.com -p
+cp sredev2.test.com.crt /usr/local/share/ca-certificates/sredev2.test.com.crt
+update-ca-certificates
+
+MAC 端
+将IP：port添加到preferences --&gt; advenced --&gt; inseure registries
+</code></pre><p><strong> docker login 失败：需要修改下面参数 </strong></p>
+<pre><code>sudo sysctl -w net.ipv4.tcp_mtu_probing=1
+
+net.ipv4.tcp_mtu_probing=1
+</code></pre><h5 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试"></a>客户端测试</h5><p>  $ docker login</p>
+<p>  $docker tag nginx:1.11.5 sredev2.test.com/test/nginx:1.11.5</p>
+<p>  $ docker push sredev2.test.com/test/nginx:1.11.5</p>
+<h5 id="推荐一篇文章-里面讲解非常详细"><a href="#推荐一篇文章-里面讲解非常详细" class="headerlink" title="推荐一篇文章 里面讲解非常详细"></a>推荐一篇文章 里面讲解非常详细</h5><p><a href="https://segmentfault.com/a/1190000007705296#articleHeader6" target="_blank" rel="external">https://segmentfault.com/a/1190000007705296#articleHeader6</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/01/03/2016-年底总结/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -346,7 +604,7 @@
       
         
           
-            <h5 id="工作评分-４分"><a href="#工作评分-４分" class="headerlink" title="工作评分　　４分"></a>工作评分　　４分</h5><p><em>关于工作又一次在年底换了份工作，明天入职新公司，希望能在新公司改正掉自己的很多哟不好的习惯，说实话，前东家对我很包容，犯过很多错误，在其他公司可能被开除n次了，我自己确实没有严格要求自己，很多错误都是属于马虎，并不是不会做，也不是做不好，只是没有用心去做导致出过很多纰漏。<br>经过今年出的各种事情，确实让我意识到了自己的很多不足，今年一整年都在做机房迁移，前前后后数百台服务器，兄弟们经常加班到深夜，配合研发、测试同事一同完成机房的迁移，这个过程学习到了很多，也很庆幸，年初了时候很多人劝我离开这里，不过我觉着马上要迁移机房，虽然我技术没有那么厉害，但是我毕竟熟悉业务，这时候走有点不负责任，这是往大了说。往小了说，我相信这个过程会对我技术的成长有很大的帮助，结果也确实是这样，我得到的收获远远大于跳槽所得到的。收获不仅是技术，很多的是在迁移过程中知道了自己的不足，经过这次迁移我未来做事会更加稳重、成熟。<br>感谢技术总监，劈头盖脸的把我骂醒。工作评分最终还是不及格，４分中两分为自己意识到了自己的缺点。两分为找到了更好的跳板，虽然最想去的地方没去成，不过一步一步来，不是谁都有机会一下接触到那么好的机会。其他全部０分是对自己今年所犯错误的警示。</em></p>
+            <h5 id="工作评分-４分"><a href="#工作评分-４分" class="headerlink" title="工作评分　　４分"></a>工作评分　　４分</h5><p><em>关于工作又一次在年底换了份工作，明天入职新公司，希望能在新公司改正掉自己的很多不好的习惯，说实话，前东家对我很包容，犯过很多错误，在其他公司可能被开除n次了，我自己确实没有严格要求自己，很多错误都是属于马虎，并不是不会做，也不是做不好，只是没有用心去做导致出过很多纰漏。<br>经过今年出的各种事情，确实让我意识到了自己的很多不足，今年一整年都在做机房迁移，前前后后数百台服务器，兄弟们经常加班到深夜，配合研发、测试同事一同完成机房的迁移，这个过程学习到了很多，也很庆幸，年初了时候很多人劝我离开这里，不过我觉着马上要迁移机房，虽然我技术没有那么厉害，但是我毕竟熟悉业务，这时候走有点不负责任，这是往大了说。往小了说，我相信这个过程会对我技术的成长有很大的帮助，结果也确实是这样，我得到的收获远远大于跳槽所得到的。收获不仅是技术，很多的是在迁移过程中知道了自己的不足，经过这次迁移我未来做事会更加稳重、成熟。<br>感谢技术总监，劈头盖脸的把我骂醒。工作评分最终还是不及格，４分中两分为自己意识到了自己的缺点。两分为找到了更好的跳板，虽然最想去的地方没去成，不过一步一步来，不是谁都有机会一下接触到那么好的机会。其他全部０分是对自己今年所犯错误的警示。</em></p>
 <h5 id="运动-６分"><a href="#运动-６分" class="headerlink" title="运动　６分"></a>运动　６分</h5><p><em>关于运动，去年一年由于膝盖的原因都不敢打球了，今年也是去了北大国际医院看了下，做了几次理疗，感觉也就那么回事，主要还是减重对膝盖比较好，现在也不敢在水泥地发挥全部力量了，多数只是打打养生篮球，不过有时候求胜欲望强烈也收不住，所以大多数时候都会选择跟一帮强度低的人打，今年还学会了打乒乓球，虽然经常被大宝虐的要死要死的，不过总算是入门了，以后打不了篮球的时候可以打乒乓球，总体来说今年的运动还算可以，算是及格吧。不高不低。</em></p>
 <h5 id="感情"><a href="#感情" class="headerlink" title="感情"></a>感情</h5><p><em>认识了大宝，大宝对我真是非常好，当时公司还没搬家的时候，每天早上在她家楼下接她，那时候状态非常好，早睡早起，送完大宝去公司吃免费早餐，后来的古北水镇、承德之行、以及前一阵刚回来的泰国之行，都是这一年之中最美好的回忆，未来还有很多事情需要处理，比如房子、见家长等等一系列事情。</em></p>
 <h5 id="赚钱-５分"><a href="#赚钱-５分" class="headerlink" title="赚钱　５分"></a>赚钱　５分</h5><p><em>跳个槽薪水增加了将近１倍，不过并没有攒下什么钱，未来要多攒一些钱了，手里的这些钱，还不够明年交房租的，个人存款太少，这个是未来要改善的地方，不过薪水还可以，不过总体还是不及格，毕竟手里的钱太少，平时花费少点，赶上节假日可以稍微多一点，我今年的状态是平时花钱多，节假日更多，导致的剩不下钱，要对钱重视点。总体５分吧，不及格主要还是没攒下什么钱。明年计划攒钱１０w，如果买了房子，还的房贷也可以算在里面。</em></p>
@@ -870,7 +1128,7 @@ print(test_fun())
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -881,7 +1139,7 @@ print(test_fun())
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -923,7 +1181,7 @@ print(test_fun())
   &copy;  2016 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-liuheihei"></i>
+    <i class="fa fa-"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">liuheihei</span>
 </div>
