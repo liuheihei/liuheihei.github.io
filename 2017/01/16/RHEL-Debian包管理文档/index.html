@@ -85,27 +85,24 @@
 
 
 <meta name="description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-RHEL下软件包管理rpm 命令安装软件
-$ rpm -ivh &amp;lt;package_name&amp;gt;
-卸载软件
-$ rpm -e &amp;lt;pac">
+Debaindpkg安装软件
+$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
+$ dpkg -P &amp;lt;package_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RHEL-Debian包管理文档">
 <meta property="og:url" content="http://liuheihei.github.io/2017/01/16/RHEL-Debian包管理文档/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-RHEL下软件包管理rpm 命令安装软件
-$ rpm -ivh &amp;lt;package_name&amp;gt;
-卸载软件
-$ rpm -e &amp;lt;pac">
-<meta property="og:updated_time" content="2017-02-15T10:09:02.000Z">
+Debaindpkg安装软件
+$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
+$ dpkg -P &amp;lt;package_">
+<meta property="og:updated_time" content="2017-02-15T10:20:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RHEL-Debian包管理文档">
 <meta name="twitter:description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-RHEL下软件包管理rpm 命令安装软件
-$ rpm -ivh &amp;lt;package_name&amp;gt;
-卸载软件
-$ rpm -e &amp;lt;pac">
+Debaindpkg安装软件
+$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
+$ dpkg -P &amp;lt;package_">
 
 
 
@@ -368,7 +365,39 @@ $ rpm -e &amp;lt;pac">
 
       
         <h1 id="ubuntu-软件包使用"><a href="#ubuntu-软件包使用" class="headerlink" title="ubuntu 软件包使用"></a>ubuntu 软件包使用</h1><p>之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。</p>
-<h3 id="RHEL下软件包管理"><a href="#RHEL下软件包管理" class="headerlink" title="RHEL下软件包管理"></a>RHEL下软件包管理</h3><h5 id="rpm-命令"><a href="#rpm-命令" class="headerlink" title="rpm 命令"></a>rpm 命令</h5><p>安装软件</p>
+<h3 id="Debain"><a href="#Debain" class="headerlink" title="Debain"></a>Debain</h3><h5 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h5><p>安装软件</p>
+<pre><code>$ dpkg -i &lt;package_name&gt; #保留配置
+$ dpkg -P &lt;package_name&gt; #不保留配置
+</code></pre><p>卸载软件</p>
+<pre><code>$ dpkg -r &lt;package_name&gt;
+</code></pre><p>查看包的相信信息</p>
+<pre><code>$ dpkg -s &lt;package_name&gt;
+</code></pre><p>查询某文件是由哪个包生成的</p>
+<pre><code>$ dpkg -S &lt;filename&gt;
+</code></pre><p>查询包里安装里哪些文件</p>
+<pre><code>$ dpkg -L &lt;package_name&gt;
+</code></pre><p>查询某包是否被安装</p>
+<pre><code>$ dpkg -l &lt;package_name&gt;
+$ dpkg -l | grep &lt;package_name&gt;
+</code></pre><p>列出所有被安装的包</p>
+<pre><code>$ dpkg -l
+</code></pre><h5 id="apt-get命令"><a href="#apt-get命令" class="headerlink" title="apt-get命令"></a>apt-get命令</h5><p>安装包</p>
+<pre><code>$ apt-get install &lt;package_name&gt;
+</code></pre><p>指定安装包版本</p>
+<pre><code>$ apt-get install &lt;package_name&gt;=1.1.1
+</code></pre><p>卸载软件</p>
+<pre><code>$ apt-get remove &lt;package_name&gt; #保留配置
+$ apt-get remove --purge &lt;package_name&gt; #删除配置
+$ apt-get autoremote #删除包以及其依赖的软件包
+$ apt-get autoremote --purge #删除包以及其依赖的软件包并删除配置文件
+</code></pre><p>删除本地缓存</p>
+<pre><code>$ apt-get clean
+$ apt-get autoclean
+</code></pre><p>更新和升级</p>
+<pre><code>$ apt-get upgrade &lt;package_name&gt;
+</code></pre><p>查询某个文件哪个包存在</p>
+<pre><code>$ apt-file search &lt;filename&gt;
+</code></pre><h3 id="RHEL下软件包管理"><a href="#RHEL下软件包管理" class="headerlink" title="RHEL下软件包管理"></a>RHEL下软件包管理</h3><h5 id="rpm-命令"><a href="#rpm-命令" class="headerlink" title="rpm 命令"></a>rpm 命令</h5><p>安装软件</p>
 <pre><code>$ rpm -ivh &lt;package_name&gt;
 </code></pre><p>卸载软件</p>
 <pre><code>$ rpm -e &lt;package_name&gt; ( 如果有依赖关系，yum命令会更简单一点。)
@@ -405,38 +434,6 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
 因此yum update 可以更保守的管理包，但是yum upgrade 会保持包的状态是最新的。
 </code></pre><p>查询某个文件哪个包存在</p>
 <pre><code>$ yum provides &quot;*/&lt;filename&gt;&quot;
-</code></pre><h3 id="Debain"><a href="#Debain" class="headerlink" title="Debain"></a>Debain</h3><h5 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h5><p>安装软件</p>
-<pre><code>$ dpkg -i &lt;package_name&gt; #保留配置
-$ dpkg -P &lt;package_name&gt; #不保留配置
-</code></pre><p>卸载软件</p>
-<pre><code>$ dpkg -r &lt;package_name&gt;
-</code></pre><p>查看包的相信信息</p>
-<pre><code>$ dpkg -s &lt;package_name&gt;
-</code></pre><p>查询某文件是由哪个包生成的</p>
-<pre><code>$ dpkg -S &lt;filename&gt;
-</code></pre><p>查询包里安装里哪些文件</p>
-<pre><code>$ dpkg -L &lt;package_name&gt;
-</code></pre><p>查询某包是否被安装</p>
-<pre><code>$ dpkg -l &lt;package_name&gt;
-$ dpkg -l | grep &lt;package_name&gt;
-</code></pre><p>列出所有被安装的包</p>
-<pre><code>$ dpkg -l
-</code></pre><h5 id="apt-get命令"><a href="#apt-get命令" class="headerlink" title="apt-get命令"></a>apt-get命令</h5><p>安装包</p>
-<pre><code>$ apt-get install &lt;package_name&gt;
-</code></pre><p>指定安装包版本</p>
-<pre><code>$ apt-get install &lt;package_name&gt;=1.1.1
-</code></pre><p>卸载软件</p>
-<pre><code>$ apt-get remove &lt;package_name&gt; #保留配置
-$ apt-get remove --purge &lt;package_name&gt; #删除配置
-$ apt-get autoremote #删除包以及其依赖的软件包
-$ apt-get autoremote --purge #删除包以及其依赖的软件包并删除配置文件
-</code></pre><p>删除本地缓存</p>
-<pre><code>$ apt-get clean
-$ apt-get autoclean
-</code></pre><p>更新和升级</p>
-<pre><code>$ apt-get upgrade &lt;package_name&gt;
-</code></pre><p>查询某个文件哪个包存在</p>
-<pre><code>$ apt-file search &lt;filename&gt;
 </code></pre>
       
     </div>
@@ -600,7 +597,7 @@ $ apt-get autoclean
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu-软件包使用"><span class="nav-number">1.</span> <span class="nav-text">ubuntu 软件包使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RHEL下软件包管理"><span class="nav-number">1.0.1.</span> <span class="nav-text">RHEL下软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm-命令"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">rpm 命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum命令"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">yum命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debain"><span class="nav-number">1.0.2.</span> <span class="nav-text">Debain</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dpkg"><span class="nav-number">1.0.2.0.1.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apt-get命令"><span class="nav-number">1.0.2.0.2.</span> <span class="nav-text">apt-get命令</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu-软件包使用"><span class="nav-number">1.</span> <span class="nav-text">ubuntu 软件包使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debain"><span class="nav-number">1.0.1.</span> <span class="nav-text">Debain</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dpkg"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apt-get命令"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">apt-get命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RHEL下软件包管理"><span class="nav-number">1.0.2.</span> <span class="nav-text">RHEL下软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm-命令"><span class="nav-number">1.0.2.0.1.</span> <span class="nav-text">rpm 命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum命令"><span class="nav-number">1.0.2.0.2.</span> <span class="nav-text">yum命令</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
