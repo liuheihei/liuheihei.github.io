@@ -437,6 +437,34 @@
 </ul>
 </li>
 </ul>
+<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><ul>
+<li>性质1: 在二叉树的第i层上最多有（2的i-1次方）个结点。</li>
+<li>性质2: 深度为k的二叉树最多有（2的k次方-1）个结点。</li>
+<li>性质3: 对于任何一个二叉树、如果叶结点的个数为(n0),度为2的结点树为(n2),则(n0)=(n2)+1</li>
+<li>性质4: 具有n个结点的完全二叉树的深度为|log2(n)|+1 #(|x|为不大于x的最大正整数。)</li>
+<li>性质5: 没看懂</li>
+</ul>
+<h4 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h4><p><strong>顺序存储</strong>：用一维数组来存储结点的存储位置，不存在的结点设置为^标志，代表该结点为空。该存储结构适用于完全二叉树。极限来讲如果一个二叉树，全部为右结点，则浪费非常大的空间。如果为K个结点则需要分配（2的k次方）-1个存储单元。<br><strong>二叉链表</strong>：结构体有两个指针域，分别指向左子树和右子树，还有一个data域用于存储数据。如果需要可以在增加一个指针来指向父结点。</p>
+<h4 id="遍历二叉树"><a href="#遍历二叉树" class="headerlink" title="遍历二叉树"></a>遍历二叉树</h4><p>遍历二叉树的定义：从根结点出发按照某种次序，必须对树中每个结点有且仅有访问一次。</p>
+<p>遍历二叉树主要有四种算法：</p>
+<ul>
+<li>前序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+<li>层序遍历</li>
+</ul>
+<p><strong>前序遍历</strong>：每次遍历的时候<strong>从根结点</strong>只访问最左侧的结点直到最低部。当最左侧为空的时候开始由下至上访问右子树。<br><strong>中序遍历</strong>：从树最左侧的底部开始访问，然后访问该结点的父结点，然后访问该结点的右结点（如果存在），如果不存在则访问父结点的父结点。当遍历到根结点时，以相同的方法遍历右子树。<br><strong>后序遍历</strong>：从树的最左侧的底部开始访问，先访问该结点的右结点（如果存在），在访问该结点的父结点，然后访问该结点父结点的最左测的子树，依次类推。<br><strong>层序遍历</strong>：在同一层中从左到右，从上到写依次遍历。</p>
+<p><code>已知一个二叉树的前序和中序是可以确定一个二叉树。</code><br><code>已知一个二叉树的后序和中序也可以确定一个二叉树。</code><br><code>但是已知二叉树的前序和后序则不能确定一个二叉树。</code></p>
+<h6 id="实现算法："><a href="#实现算法：" class="headerlink" title="实现算法："></a>实现算法：</h6><p><strong>前序遍历</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void PreOrderTraverse(BiTree T)</div><div class="line">&#123;</div><div class="line">  if (T == NULL)</div><div class="line">    return;</div><div class="line">  printf(&quot;%c&quot;, T-&gt;data); // 打印结点数据</div><div class="line">  PreOrderTraverse(T-lchild); //递归遍历左子树</div><div class="line">  PreOrderTraverse(T-rchild); //递归遍历右子树</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>中序遍历</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void PreOrderTraverse(BiTree T)</div><div class="line">&#123;</div><div class="line">  if (T == NULL)</div><div class="line">    return;</div><div class="line">  PreOrderTraverse(T-lchild); //递归遍历左子树</div><div class="line">  printf(&quot;%c&quot;, T-&gt;data); // 打印结点数据</div><div class="line">  PreOrderTraverse(T-rchild); //递归遍历右子树</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>后序遍历</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void PreOrderTraverse(BiTree T)</div><div class="line">&#123;</div><div class="line">  if (T == NULL)</div><div class="line">    return;</div><div class="line">  PreOrderTraverse(T-lchild); //递归遍历左子树</div><div class="line">  PreOrderTraverse(T-rchild); //递归遍历右子树</div><div class="line">  printf(&quot;%c&quot;, T-&gt;data); // 打印结点数据</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h4><p><strong>概念</strong>：当使用二叉链表这个存储结构时，当有n个结点的二叉链表，就会有2n个指针域，但是实际使用的只有(n-1)个分支线数，所以浪费掉了(n+1)个指针。这些空间都使用^号来表示，浪费的内存的空间。于是把这些浪费的指针空间设定为该结点的<code>前驱指针</code>和<code>后继指针</code>，这两个指针被称之为<strong>线索</strong>，拥有线索的二叉链表被称之为<strong>线索二叉树</strong>。</p>
+<p><strong>ltag 和 rtag</strong>:用于区分该指针为实际指针或者线索指针的标记。用布尔值来表示。</p>
+<ul>
+<li>当ltag为0时，指向左子树，否则指向该结点的前驱。</li>
+<li>当rtag为0时，指向右子树，否则指向该结点的后继。</li>
+</ul>
+<p><code>布尔型变量占用内存空间小于指针变量。</code><br><code>注：线索的过程必须在遍历二叉树之后才能知道未使用的指针应该指向哪里。所以线索化的过程就是遍历的过程。</code></p>
 
           
         
