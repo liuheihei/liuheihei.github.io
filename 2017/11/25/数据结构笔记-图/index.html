@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux系统," />
+  <meta name="keywords" content="数据结构," />
 
 
 
@@ -84,25 +84,37 @@
 
 
 
-<meta name="description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-Debaindpkg安装软件
-$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
-$ dpkg -P &amp;lt;package_">
+<meta name="description" content="图图的定义图：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。
+图就是由一堆点和一堆线组成，其中图中的元素叫做顶点，图中不可以没有元素，各个顶点之间的逻辑关系由边来表示。
+图的类型
+
+简单图定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。
+
+无向图
+无向边： 顶点V1–&amp;gt;V2之间的边没">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RHEL-Debian包管理文档">
-<meta property="og:url" content="http://liuheihei.github.io/2017/01/16/RHEL-Debian包管理文档/index.html">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="http://liuheihei.github.io/2017/11/25/数据结构笔记-图/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-Debaindpkg安装软件
-$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
-$ dpkg -P &amp;lt;package_">
-<meta property="og:updated_time" content="2017-11-22T08:01:38.000Z">
+<meta property="og:description" content="图图的定义图：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。
+图就是由一堆点和一堆线组成，其中图中的元素叫做顶点，图中不可以没有元素，各个顶点之间的逻辑关系由边来表示。
+图的类型
+
+简单图定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。
+
+无向图
+无向边： 顶点V1–&amp;gt;V2之间的边没">
+<meta property="og:updated_time" content="2017-11-25T13:47:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RHEL-Debian包管理文档">
-<meta name="twitter:description" content="ubuntu 软件包使用之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。
-Debaindpkg安装软件
-$ dpkg -i &amp;lt;package_name&amp;gt; #保留配置
-$ dpkg -P &amp;lt;package_">
+<meta name="twitter:title" content="数据结构">
+<meta name="twitter:description" content="图图的定义图：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。
+图就是由一堆点和一堆线组成，其中图中的元素叫做顶点，图中不可以没有元素，各个顶点之间的逻辑关系由边来表示。
+图的类型
+
+简单图定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。
+
+无向图
+无向边： 顶点V1–&amp;gt;V2之间的边没">
 
 
 
@@ -134,7 +146,7 @@ $ dpkg -P &amp;lt;package_">
 
 
 
-  <title> RHEL-Debian包管理文档 | Hexo </title>
+  <title> 数据结构 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -267,7 +279,7 @@ $ dpkg -P &amp;lt;package_">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/01/16/RHEL-Debian包管理文档/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/11/25/数据结构笔记-图/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -291,7 +303,7 @@ $ dpkg -P &amp;lt;package_">
             
             
               
-                RHEL-Debian包管理文档
+                数据结构
               
             
           </h1>
@@ -306,8 +318,8 @@ $ dpkg -P &amp;lt;package_">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2017-01-16T11:22:06+08:00">
-                2017-01-16
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2017-11-25T18:55:43+08:00">
+                2017-11-25
               </time>
             
 
@@ -347,8 +359,8 @@ $ dpkg -P &amp;lt;package_">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/01/16/RHEL-Debian包管理文档/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/16/RHEL-Debian包管理文档/" itemprop="commentCount"></span>
+                <a href="/2017/11/25/数据结构笔记-图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/25/数据结构笔记-图/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -374,79 +386,61 @@ $ dpkg -P &amp;lt;package_">
       
 
       
-        <h1 id="ubuntu-软件包使用"><a href="#ubuntu-软件包使用" class="headerlink" title="ubuntu 软件包使用"></a>ubuntu 软件包使用</h1><p>之前一直在RHEL系列工作，安装软件系列的操作十分熟悉了，比如rpm、yum命令都是使用的非常熟悉。但是debian的apt-get、dpkg确很生疏，今天有空记录一下RHEL下经常使用的操作，并对应Debian系列如何使用。</p>
-<h3 id="Debain"><a href="#Debain" class="headerlink" title="Debain"></a>Debain</h3><h5 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h5><p>安装软件</p>
-<pre><code>$ dpkg -i &lt;package_name&gt; #保留配置
-$ dpkg -P &lt;package_name&gt; #不保留配置
-</code></pre><p>卸载软件</p>
-<pre><code>$ dpkg -r &lt;package_name&gt;
-</code></pre><p>查看包的相信信息</p>
-<pre><code>$ dpkg -s &lt;package_name&gt;
-</code></pre><p>查询某文件是由哪个包生成的</p>
-<pre><code>$ dpkg -S &lt;filename&gt;
-</code></pre><p>查询包里安装里哪些文件</p>
-<pre><code>$ dpkg -L &lt;package_name&gt;
-</code></pre><p>查询某包是否被安装</p>
-<pre><code>$ dpkg -l &lt;package_name&gt;
-$ dpkg -l | grep &lt;package_name&gt;
-</code></pre><p>列出所有被安装的包</p>
-<pre><code>$ dpkg -l
-</code></pre><h5 id="apt-get命令"><a href="#apt-get命令" class="headerlink" title="apt-get命令"></a>apt-get命令</h5><p>安装包</p>
-<pre><code>$ apt-get install &lt;package_name&gt;
-</code></pre><p>指定安装包版本</p>
-<pre><code>$ apt-get install &lt;package_name&gt;=1.1.1
-</code></pre><p>卸载软件</p>
-<pre><code>$ apt-get remove &lt;package_name&gt; #保留配置
-$ apt-get remove --purge &lt;package_name&gt; #删除配置
-$ apt-get autoremote #删除包以及其依赖的软件包
-$ apt-get autoremote --purge #删除包以及其依赖的软件包并删除配置文件
-</code></pre><p>删除本地缓存</p>
-<pre><code>$ apt-get clean
-$ apt-get autoclean
-</code></pre><p>更新和升级</p>
-<pre><code>$ apt-get upgrade &lt;package_name&gt;
-</code></pre><p>查询某个文件哪个包存在</p>
-<pre><code>$ apt-file search &lt;filename&gt;
-</code></pre><p>查询某个包在源中的版本</p>
-<pre><code>$ apt-cache show   &lt;package_name&gt;   
-</code></pre><h3 id="RHEL下软件包管理"><a href="#RHEL下软件包管理" class="headerlink" title="RHEL下软件包管理"></a>RHEL下软件包管理</h3><h5 id="rpm-命令"><a href="#rpm-命令" class="headerlink" title="rpm 命令"></a>rpm 命令</h5><p>安装软件</p>
-<pre><code>$ rpm -ivh &lt;package_name&gt;
-</code></pre><p>卸载软件</p>
-<pre><code>$ rpm -e &lt;package_name&gt; ( 如果有依赖关系，yum命令会更简单一点。)
-</code></pre><p>查询某文件是由哪个包生成的</p>
-<pre><code>$ rpm -qf &lt;filename&gt;
-</code></pre><p>查询包里安装里哪些文件</p>
-<pre><code>$ rpm -qf &lt;package_name&gt;
-</code></pre><p>查询某包是否被安装</p>
-<pre><code>$ rpm -q &lt;package_name&gt;
-</code></pre><p>列出所有被安装的包</p>
-<pre><code>$ rpm -qa
-</code></pre><p>升级一个包</p>
-<pre><code>$ rpm -Uvh &lt;package_name&gt;
+        <hr>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><h5 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h5><p><strong>图</strong>：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。</p>
+<p>图就是由一堆点和一堆线组成，其中图中的元素叫做<strong>顶点</strong>，图中不可以没有元素，各个顶点之间的逻辑关系由<strong>边</strong>来表示。</p>
+<p><strong>图的类型</strong></p>
+<ul>
+<li><p>简单图<br>定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。</p>
+</li>
+<li><p>无向图</p>
+<p>无向边： 顶点<strong>V1–&gt;V2</strong>之间的边没有方向，则称这条边(V1,v2)为无向边。表示为(V1, V2)或者(V2, V1)。<br><strong>无向边用小括号表示。</strong><br>无向图定义： 在图中<strong>任意</strong>两个顶点之间的边都是无向边。</p>
+<ul>
+<li>无向完全图<br>定义： 在无向图中，每个顶点之间都存在一条无向边称为无向完全图。无向完全图由n*(n-1)/2条边。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>有向图<br>有向边： 顶点<strong>V1–&gt;V2</strong>之间的边有方向，假设由V1指向V2，则这条边被称为有向边或者弧，V1称为弧头，V2称为弧尾。表示为”&lt; V1, V2&gt;”，不可写为’(V2, V1)’。</p>
+<p><strong>有向边用”&lt;&gt;”表示。</strong></p>
+<p>有向图： 在图中<strong>任意</strong>两个顶点之间的边都是有向的。</p>
+<ul>
+<li>有向完全图<br>定义： 在任意两个顶点之间都存在两条方向互为相反的弧，则称改图为有向完全图。</li>
+</ul>
+</li>
+</ul>
+<p><strong>网</strong>： 图的边带有权重，叫做网。</p>
+<p><strong>子图</strong>： 存在两个图，G1(V1, {E1})和G2(V2, {E2}),当V1包含于V2且E1包含于E2，则说明G1是G2的子图。</p>
+<p><strong>图的边与顶点的关系</strong></p>
+<ul>
+<li><p>无向图<br>对于无向图G(V, {E}),如果顶点V1, V2之间的边(V1, V2)包含于E， 则称两个顶点相邻接。边(V1, V2)依附于顶点V1，V2。</p>
+<p>度（TD）：顶点V1的度是和V1相关联边的数目。</p>
+</li>
+<li><p>有向图<br>对于有向图G(V, {E}),如果弧<v1, v2="">包含于E，则称顶点V1临接到V2，或者称顶点V2临接于V1。弧<v1，v2>和V1,V2相关联。</v1，v2></v1,></p>
+<p>出度（OD）：以V为尾的弧的数目称之为V的出度。<br>入度（ID）：以V为头的弧的数目称之为V的入度。<br>度（TD）：OD+ID</p>
+</li>
+</ul>
+<p><strong>简单回路（环）</strong>：从第一个顶点到最后一个顶点的路径叫做回路或者环，如果这个回路中除了第一个顶点和最后一个顶点之外没有重复的回路，被称之为简单回路。（小时候玩的一笔画完称之为简单回路（差别是不需要全部顶点都包含在内））</p>
+<p><strong>连通图</strong>：在图G中如果在图中任意两个顶点都是连通的，被称之为连通图。</p>
+<p><strong>连通分量</strong>：无向图中极大连通子图称为连通分量。</p>
+<ul>
+<li>要是子图</li>
+<li>子图要连通</li>
+<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
+<li>具有极大顶点数的连通子图包含依附于这些顶点的所有边</li>
+</ul>
+<p><strong>强连通图</strong>：有向图中每一对V1、V2，从V1–&gt;V2、V2–&gt;V1都存在路径，则称图G是强连通图。</p>
+<p><strong>强连通分量</strong>：有向图中的极大强连通子图称为强连通分量。</p>
+<ul>
+<li>要是子图</li>
+<li>子图要连通</li>
+<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
+<li>具有极大顶点数的连通子图包含依附于这些顶点的所有弧</li>
+</ul>
+<p><strong>无向连通图的生成树</strong>：就是把一个连通图用树的方式展现出来。包含全部n个顶点，并且边数为n-1</p>
+<p><strong>有向图的生成树</strong>：有向图中如果有一个顶点入度为0，其余入度都为1，则该图是一颗有向生成树。</p>
+<p><strong>有向图的生成森林</strong>：一个有向图由若干课数组成的森林，该森林包含所有顶点。</p>
 
-$ rpm -Uvh --oldpackage &lt;package_name&gt; #降级
-</code></pre><h5 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h5><p>安装包</p>
-<pre><code>$ yum install &lt;package_name&gt; #自动安装依赖包
-</code></pre><p>安装包组</p>
-<pre><code>$ yum groupinstall &lt;group_name&gt;
-</code></pre><p>卸载软件</p>
-<pre><code>$ yum remove &lt;package_name&gt;
-</code></pre><p>删除本地缓存</p>
-<pre><code>$ yum clean all
-</code></pre><p>查询源中有哪些包</p>
-<pre><code>$ yum list
-</code></pre><p>更新和升级</p>
-<pre><code>$ yum update / yum upgrade  #全部更新
-
-$ yum update &lt;package_name&gt; # 更新单个包以及所依赖的包
-</code></pre><p>yum update 和 yum upgrade 的区别(google 找的并未测试)</p>
-<pre><code>yum upgrade == yum update --obsoletes
-yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为 foo2，那么它会安装 foo2
-并且把 foo 删除，而 yum update 只会升级 foo，不会将包更新到 foo2。
-因此yum update 可以更保守的管理包，但是yum upgrade 会保持包的状态是最新的。
-</code></pre><p>查询某个文件哪个包存在</p>
-<pre><code>$ yum provides &quot;*/&lt;filename&gt;&quot;
-</code></pre>
       
     </div>
 
@@ -469,7 +463,7 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
       
         <div class="post-tags">
           
-            <a href="/tags/linux系统/" rel="tag"># linux系统</a>
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
         </div>
       
@@ -478,8 +472,8 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/14/Harbor-Docker-Registry/" rel="next" title="Harbor Docker Registry">
-                <i class="fa fa-chevron-left"></i> Harbor Docker Registry
+              <a href="/2017/11/19/数据结构笔记-树/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -487,10 +481,6 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/19/数据结构笔记-树/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +610,7 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu-软件包使用"><span class="nav-number">1.</span> <span class="nav-text">ubuntu 软件包使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debain"><span class="nav-number">1.0.1.</span> <span class="nav-text">Debain</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dpkg"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apt-get命令"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">apt-get命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RHEL下软件包管理"><span class="nav-number">1.0.2.</span> <span class="nav-text">RHEL下软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm-命令"><span class="nav-number">1.0.2.0.1.</span> <span class="nav-text">rpm 命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum命令"><span class="nav-number">1.0.2.0.2.</span> <span class="nav-text">yum命令</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#图"><span class="nav-number">1.</span> <span class="nav-text">图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#图的定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">图的定义</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -733,9 +723,9 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
 
     <script type="text/javascript">
       var disqus_shortname = 'disqus_HU2NHxcrK3';
-      var disqus_identifier = '2017/01/16/RHEL-Debian包管理文档/';
+      var disqus_identifier = '2017/11/25/数据结构笔记-图/';
 
-      var disqus_title = "RHEL-Debian包管理文档";
+      var disqus_title = "数据结构";
 
 
       function run_disqus_script(disqus_script) {
