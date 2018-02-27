@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/02/23/keepalive vrrp基本原理/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/02/27/TCP三次握手/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -281,8 +281,8 @@
             
               
                 
-                <a class="post-title-link" href="/2018/02/23/keepalive vrrp基本原理/" itemprop="url">
-                  未命名
+                <a class="post-title-link" href="/2018/02/27/TCP三次握手/" itemprop="url">
+                  TCP三次握手
                 </a>
               
             
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-02-23T22:35:47+08:00">
-                2018-02-23
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-02-27T22:23:43+08:00">
+                2018-02-27
               </time>
             
 
@@ -309,6 +309,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -317,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/23/keepalive vrrp基本原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/23/keepalive vrrp基本原理/" itemprop="commentCount"></span>
+                <a href="/2018/02/27/TCP三次握手/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/27/TCP三次握手/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -346,7 +368,58 @@
       
         
           
-            
+            <h2 id="请详细描述一下tcp三次握手的原理"><a href="#请详细描述一下tcp三次握手的原理" class="headerlink" title="请详细描述一下tcp三次握手的原理"></a>请详细描述一下tcp三次握手的原理</h2><h3 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h3><p><strong>ISN(Initial Sequence Number)</strong>： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN = M + F(SIP, SPort, DIP, DPort，<some secret="">)</some></p>
+<p>MSS： 最大报文长度，在三次握手时双方为协商这个字段，以MSS较少的一方来决定。</p>
+<h3 id="三次握手的过程"><a href="#三次握手的过程" class="headerlink" title="三次握手的过程"></a>三次握手的过程</h3><p>一、请求端生成一个ISN序列号，并向接收连接端发送SYN、ISN、MSS大小。<br>二、接收端收到请求后，生成一个ISN序列号，回复ACK、SYN、ISN、MSS，其中ACK=请求端的ISN+1。<br>三、请求端收到接收端的请求后，回应ACK=接收端ISN+1</p>
+<p>链接建立。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1519751805044&amp;di=9d6c39b029a00c77cac9fe385ed92eac&amp;imgtype=0&amp;src=http%3A%2F%2Fimg1.51cto.com%2Fattachment%2F201308%2F194031521.png" alt="如图"></p>
+<h3 id="抓包时各个字段的含义"><a href="#抓包时各个字段的含义" class="headerlink" title="抓包时各个字段的含义"></a>抓包时各个字段的含义</h3><table>
+<thead>
+<tr>
+<th>标志</th>
+<th style="text-align:center">3字符缩写</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td style="text-align:center">SYN</td>
+<td style="text-align:right">同步序号</td>
+</tr>
+<tr>
+<td>F</td>
+<td style="text-align:center">FIN</td>
+<td style="text-align:right">发送方完成数据传送</td>
+</tr>
+<tr>
+<td>R</td>
+<td style="text-align:center">RST</td>
+<td style="text-align:right">复位连接</td>
+</tr>
+<tr>
+<td>P</td>
+<td style="text-align:center">PSH</td>
+<td style="text-align:right">尽可能的将数据送往接收进程</td>
+</tr>
+<tr>
+<td>.</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">以上四个标志位都置为0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><pre><code>一、为什么使用计数器的方式生成ISN不安全？
+假设有三个角色，服务器A、服务器B、攻击者C，如果使用老的ISN生成方式，有如下安全问题。
+攻击过程：
+    C冒充服务器B向服务器A发起链接请求。
+    1) C 6666端口向A 8888端口发起链接请求，此时数据包内容为(源IP为B，源端口为6666,目的IP为A,目的端口为8888， ISN为C生成的ISN)
+    2) C 启动9999端口向A 10000端口发起链接请求，此时数据包内容为(源IP为C，源端口为9999,目的IP为A,目的端口为10000， ISN为C生成的ISN)
+    3) A收到这个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
+    4) A收到这个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
+    5) C 冒充B向A发送ACK，此时内容为(源IP为B，源端口为6666,目的IP为A，目的端口为8888，ACK为计算出的ISN号+1)
+    此时链接建立。
+</code></pre>
           
         
       
@@ -694,176 +767,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/19/linux启动流程/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="liuheihei">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/19/linux启动流程/" itemprop="url">
-                  linux 启动流程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-01-19T19:23:43+08:00">
-                2018-01-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/19/linux启动流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/linux启动流程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="linux-启动流程"><a href="#linux-启动流程" class="headerlink" title="linux 启动流程"></a>linux 启动流程</h1><pre><code>1:BIOS通过CMOS获取硬件各项指标
-    系统通过BIOS加载CMOS，并由CMOS提供的信息取得服务器的各项硬件指标(例如硬盘信息、系统BIOS时间等)
-2:BIOS自检
-3:选择启动项(光盘、网络、硬盘、U盘等)
-4:第一个被选择启动装置的mtr被加载到内存中执行，这段引导程序最大的作用是加载bootloader
-5:bootloader的作用是：由于各个操作系统的文件系统不同，所以需要一个启动管理程序来获取操作系统的核心文件
-     bootloader重要功能
-        提供菜单：使用者可以选择不同的启动项目，这也是多重启动的重要功能！
-        加载核心文件：直接指向可启动的程序区段来开始操作系统；
-        转交其他 loader：将启动管理功能转交给其他 loader 负责。
-6:bootloader将内核(vmlinuz)解压缩至内存并在此对系统各个硬件做检查，内核此时正式接替了BIOS的工作。
-7:内核将initrd动解压缩到内存中，并将其模拟成根目录，加载启动过程中所需要的核心模块
-8: 启动第一个程序 /sbin/init 初始化系统
-9:根据/etc/inittab文件中配置选择开机启动级别
-10: 执行 /etc/rc.d/rc.sysinit配置系统所需要的环境
-11:根据/etc/rcX.d/下启动项将开机自启动服务启动，以及关闭在当前级别下应关闭的服务，该目录下S开头为Start启动，K开头为kill关闭。
-12:调用/etc/rc.local脚本
-13:弹出登录框
-14:用户登录时根据/etc/passwd校验密码并获取uid,gid,bash,家目录等
-15:加载/etc/bashrc /etc/bash.profile ~/.bashrc ~/.bashprofile 获取环境变量
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/19/docker学习笔记/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1002,6 +905,176 @@
 <li>PIDNS<br>  内核为所有的NS维护了一个树状结构，最顶层的时系统初始的时候创建的(root namespace)，后创建pid namespace被称为child namespace,父NS可以看到子NS的进程，并可以发送各种信号，子进程则不可以。<br>  主要特性：<br>  1、每一个PIDNS中都有一个PID为1的进程，该进程和传统init进程有相同的特性。<br>  2、每个PIDNS都不可能影响到其他PIDNS中的进程(root namespace)除外。<br>  3、在PIDNS中，若出现孤儿进程，该进程会交付给该PIDNS下的init进程，而并非会交付给root namespace下的init进程来管理。<br>  4、在PIDNS中的init进程，具有信号屏蔽功能，防止init进程被误杀。<br>  5、</li>
 </ul>
 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/19/linux启动流程/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="liuheihei">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/19/linux启动流程/" itemprop="url">
+                  linux 启动流程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-01-19T19:23:43+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/19/linux启动流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/linux启动流程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="linux-启动流程"><a href="#linux-启动流程" class="headerlink" title="linux 启动流程"></a>linux 启动流程</h1><pre><code>1:BIOS通过CMOS获取硬件各项指标
+    系统通过BIOS加载CMOS，并由CMOS提供的信息取得服务器的各项硬件指标(例如硬盘信息、系统BIOS时间等)
+2:BIOS自检
+3:选择启动项(光盘、网络、硬盘、U盘等)
+4:第一个被选择启动装置的mtr被加载到内存中执行，这段引导程序最大的作用是加载bootloader
+5:bootloader的作用是：由于各个操作系统的文件系统不同，所以需要一个启动管理程序来获取操作系统的核心文件
+     bootloader重要功能
+        提供菜单：使用者可以选择不同的启动项目，这也是多重启动的重要功能！
+        加载核心文件：直接指向可启动的程序区段来开始操作系统；
+        转交其他 loader：将启动管理功能转交给其他 loader 负责。
+6:bootloader将内核(vmlinuz)解压缩至内存并在此对系统各个硬件做检查，内核此时正式接替了BIOS的工作。
+7:内核将initrd动解压缩到内存中，并将其模拟成根目录，加载启动过程中所需要的核心模块
+8: 启动第一个程序 /sbin/init 初始化系统
+9:根据/etc/inittab文件中配置选择开机启动级别
+10: 执行 /etc/rc.d/rc.sysinit配置系统所需要的环境
+11:根据/etc/rcX.d/下启动项将开机自启动服务启动，以及关闭在当前级别下应关闭的服务，该目录下S开头为Start启动，K开头为kill关闭。
+12:调用/etc/rc.local脚本
+13:弹出登录框
+14:用户登录时根据/etc/passwd校验密码并获取uid,gid,bash,家目录等
+15:加载/etc/bashrc /etc/bash.profile ~/.bashrc ~/.bashprofile 获取环境变量
+</code></pre>
           
         
       

@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="description" content="请详细描述一下tcp三次握手的原理关键词解释ISN(Initial Sequence Number)： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一次完整的网站访问流程">
-<meta property="og:url" content="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/index.html">
+<meta property="og:title" content="TCP三次握手">
+<meta property="og:url" content="http://liuheihei.github.io/2018/02/27/TCP三次握手/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
-<meta property="og:updated_time" content="2018-02-20T11:58:41.000Z">
+<meta property="og:description" content="请详细描述一下tcp三次握手的原理关键词解释ISN(Initial Sequence Number)： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519751805044&di=9d6c39b029a00c77cac9fe385ed92eac&imgtype=0&src=http%3A%2F%2Fimg1.51cto.com%2Fattachment%2F201308%2F194031521.png">
+<meta property="og:updated_time" content="2018-02-27T14:31:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一次完整的网站访问流程">
-<meta name="twitter:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="twitter:title" content="TCP三次握手">
+<meta name="twitter:description" content="请详细描述一下tcp三次握手的原理关键词解释ISN(Initial Sequence Number)： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519751805044&di=9d6c39b029a00c77cac9fe385ed92eac&imgtype=0&src=http%3A%2F%2Fimg1.51cto.com%2Fattachment%2F201308%2F194031521.png">
 
 
 
@@ -125,7 +127,7 @@
 
 
 
-  <title> 一次完整的网站访问流程 | Hexo </title>
+  <title> TCP三次握手 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -258,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/02/27/TCP三次握手/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -282,7 +284,7 @@
             
             
               
-                一次完整的网站访问流程
+                TCP三次握手
               
             
           </h1>
@@ -297,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-01-19T20:23:43+08:00">
-                2018-01-19
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-02-27T22:23:43+08:00">
+                2018-02-27
               </time>
             
 
@@ -338,8 +340,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/19/一次完整的网站访问流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/一次完整的网站访问流程/" itemprop="commentCount"></span>
+                <a href="/2018/02/27/TCP三次握手/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/27/TCP三次握手/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,11 +367,58 @@
       
 
       
-        <h3 id="当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><a href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点" class="headerlink" title="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"></a>当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</h3><h4 id="查询DNS信息"><a href="#查询DNS信息" class="headerlink" title="查询DNS信息"></a>查询DNS信息</h4><p>1、浏览器获取本地dns缓存、读取hosts文件<br>2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则<strong>local DNS代替客户端以迭代的方式进行解析(默认)</strong>。首先请求管理.com域名的DNS服务器地址，.comDNS服务器回复管理baidu.com域名的DNS服务器地址，管理baidu.com的DNS回复www.baidu.com对应的IP地址，或者回复一个cname域名，如果回复一个cname域名那么将会重新执行以便上述的流程。local DNS会根据该域名配置的ttl参数来决定缓存该解析的时间。(有一部分DNS服务会遵循自己的配置，不遵循ttl，会导致域名迁移时长尾流量，长时间不能被迁移走)。假设解析到的IP地址为1.1.1.1</p>
-<h4 id="访问该网站"><a href="#访问该网站" class="headerlink" title="访问该网站"></a>访问该网站</h4><h5 id="tcp建联"><a href="#tcp建联" class="headerlink" title="tcp建联"></a>tcp建联</h5><p>客户端启动一个随机端口(例如50000端口)访问1.1.1.1:80端口<br>1、发送客户端发送SYN到某台机器上(可能经过四层负载均衡)，此时客户端状态为SYN_SEND状态。<br>2、服务端收到SYN后回复SYN+ACK，服务器进入SYN_RECV状态<br>3、客户端回复ACK(双方进入ESTAB状态)</p>
-<h5 id="http-发送get请求"><a href="#http-发送get请求" class="headerlink" title="http 发送get请求"></a>http 发送get请求</h5><p>tcp建联之后客户端发送get请求到服务器上，其中包含host字段”www.baidu.com”、uri、http协议版本等信息</p>
-<h5 id="server端响应"><a href="#server端响应" class="headerlink" title="server端响应"></a>server端响应</h5><p>server端收到http请求后，根据host、uri等信息返回指定的内容。一般会保持长链接。</p>
-
+        <h2 id="请详细描述一下tcp三次握手的原理"><a href="#请详细描述一下tcp三次握手的原理" class="headerlink" title="请详细描述一下tcp三次握手的原理"></a>请详细描述一下tcp三次握手的原理</h2><h3 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h3><p><strong>ISN(Initial Sequence Number)</strong>： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN = M + F(SIP, SPort, DIP, DPort，<some secret="">)</some></p>
+<p>MSS： 最大报文长度，在三次握手时双方为协商这个字段，以MSS较少的一方来决定。</p>
+<h3 id="三次握手的过程"><a href="#三次握手的过程" class="headerlink" title="三次握手的过程"></a>三次握手的过程</h3><p>一、请求端生成一个ISN序列号，并向接收连接端发送SYN、ISN、MSS大小。<br>二、接收端收到请求后，生成一个ISN序列号，回复ACK、SYN、ISN、MSS，其中ACK=请求端的ISN+1。<br>三、请求端收到接收端的请求后，回应ACK=接收端ISN+1</p>
+<p>链接建立。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1519751805044&amp;di=9d6c39b029a00c77cac9fe385ed92eac&amp;imgtype=0&amp;src=http%3A%2F%2Fimg1.51cto.com%2Fattachment%2F201308%2F194031521.png" alt="如图"></p>
+<h3 id="抓包时各个字段的含义"><a href="#抓包时各个字段的含义" class="headerlink" title="抓包时各个字段的含义"></a>抓包时各个字段的含义</h3><table>
+<thead>
+<tr>
+<th>标志</th>
+<th style="text-align:center">3字符缩写</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td style="text-align:center">SYN</td>
+<td style="text-align:right">同步序号</td>
+</tr>
+<tr>
+<td>F</td>
+<td style="text-align:center">FIN</td>
+<td style="text-align:right">发送方完成数据传送</td>
+</tr>
+<tr>
+<td>R</td>
+<td style="text-align:center">RST</td>
+<td style="text-align:right">复位连接</td>
+</tr>
+<tr>
+<td>P</td>
+<td style="text-align:center">PSH</td>
+<td style="text-align:right">尽可能的将数据送往接收进程</td>
+</tr>
+<tr>
+<td>.</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">以上四个标志位都置为0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><pre><code>一、为什么使用计数器的方式生成ISN不安全？
+假设有三个角色，服务器A、服务器B、攻击者C，如果使用老的ISN生成方式，有如下安全问题。
+攻击过程：
+    C冒充服务器B向服务器A发起链接请求。
+    1) C 6666端口向A 8888端口发起链接请求，此时数据包内容为(源IP为B，源端口为6666,目的IP为A,目的端口为8888， ISN为C生成的ISN)
+    2) C 启动9999端口向A 10000端口发起链接请求，此时数据包内容为(源IP为C，源端口为9999,目的IP为A,目的端口为10000， ISN为C生成的ISN)
+    3) A收到这个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
+    4) A收到这个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
+    5) C 冒充B向A发送ACK，此时内容为(源IP为B，源端口为6666,目的IP为A，目的端口为8888，ACK为计算出的ISN号+1)
+    此时链接建立。
+</code></pre>
       
     </div>
 
@@ -401,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/19/docker学习笔记/" rel="next" title="docker 学习笔记">
-                <i class="fa fa-chevron-left"></i> docker 学习笔记
+              <a href="/2018/01/23/监控的内容/" rel="next" title="监控相关">
+                <i class="fa fa-chevron-left"></i> 监控相关
               </a>
             
           </div>
@@ -410,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/23/监控的内容/" rel="prev" title="监控相关">
-                监控相关 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端响应</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#请详细描述一下tcp三次握手的原理"><span class="nav-number">1.</span> <span class="nav-text">请详细描述一下tcp三次握手的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键词解释"><span class="nav-number">1.1.</span> <span class="nav-text">关键词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手的过程"><span class="nav-number">1.2.</span> <span class="nav-text">三次握手的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抓包时各个字段的含义"><span class="nav-number">1.3.</span> <span class="nav-text">抓包时各个字段的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.4.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -656,9 +701,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'disqus_HU2NHxcrK3';
-      var disqus_identifier = '2018/01/19/一次完整的网站访问流程/';
+      var disqus_identifier = '2018/02/27/TCP三次握手/';
 
-      var disqus_title = "一次完整的网站访问流程";
+      var disqus_title = "TCP三次握手";
 
 
       function run_disqus_script(disqus_script) {
