@@ -84,16 +84,21 @@
 
 
 
-<meta name="description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="description" content="请详细描述一下tcp四次断开的原理关键词解释全双工： 数据能在两个方向上同时传递半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。MSL： (Maximum Segment Lifetime)报文最大生存时间。
+四次关闭过程一、主动关闭方生成ISN并向被动关闭方发送FIN、ISN，代表本地已经发送完所有数据，等待关闭。主动关闭状态由established变为FIN-WAIT1。二">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一次完整的网站访问流程">
-<meta property="og:url" content="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/index.html">
+<meta property="og:title" content="TCP四次断开">
+<meta property="og:url" content="http://liuheihei.github.io/2018/02/28/TCP四次断开/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
-<meta property="og:updated_time" content="2018-02-20T11:58:41.000Z">
+<meta property="og:description" content="请详细描述一下tcp四次断开的原理关键词解释全双工： 数据能在两个方向上同时传递半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。MSL： (Maximum Segment Lifetime)报文最大生存时间。
+四次关闭过程一、主动关闭方生成ISN并向被动关闭方发送FIN、ISN，代表本地已经发送完所有数据，等待关闭。主动关闭状态由established变为FIN-WAIT1。二">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519793355654&di=1280d278241b90e99896118c0ba191df&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmw690%2F001az5G6gy6GswUJvVz85%26690">
+<meta property="og:updated_time" content="2018-02-28T07:17:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一次完整的网站访问流程">
-<meta name="twitter:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="twitter:title" content="TCP四次断开">
+<meta name="twitter:description" content="请详细描述一下tcp四次断开的原理关键词解释全双工： 数据能在两个方向上同时传递半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。MSL： (Maximum Segment Lifetime)报文最大生存时间。
+四次关闭过程一、主动关闭方生成ISN并向被动关闭方发送FIN、ISN，代表本地已经发送完所有数据，等待关闭。主动关闭状态由established变为FIN-WAIT1。二">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519793355654&di=1280d278241b90e99896118c0ba191df&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmw690%2F001az5G6gy6GswUJvVz85%26690">
 
 
 
@@ -125,7 +130,7 @@
 
 
 
-  <title> 一次完整的网站访问流程 | Hexo </title>
+  <title> TCP四次断开 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -258,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/02/28/TCP四次断开/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -282,7 +287,7 @@
             
             
               
-                一次完整的网站访问流程
+                TCP四次断开
               
             
           </h1>
@@ -297,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-01-19T20:23:43+08:00">
-                2018-01-19
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-02-28T15:23:43+08:00">
+                2018-02-28
               </time>
             
 
@@ -338,8 +343,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/19/一次完整的网站访问流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/一次完整的网站访问流程/" itemprop="commentCount"></span>
+                <a href="/2018/02/28/TCP四次断开/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/28/TCP四次断开/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,10 +370,11 @@
       
 
       
-        <h3 id="当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><a href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点" class="headerlink" title="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"></a>当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</h3><h4 id="查询DNS信息"><a href="#查询DNS信息" class="headerlink" title="查询DNS信息"></a>查询DNS信息</h4><p>1、浏览器获取本地dns缓存、读取hosts文件<br>2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则<strong>local DNS代替客户端以迭代的方式进行解析(默认)</strong>。首先请求管理.com域名的DNS服务器地址，.comDNS服务器回复管理baidu.com域名的DNS服务器地址，管理baidu.com的DNS回复www.baidu.com对应的IP地址，或者回复一个cname域名，如果回复一个cname域名那么将会重新执行以便上述的流程。local DNS会根据该域名配置的ttl参数来决定缓存该解析的时间。(有一部分DNS服务会遵循自己的配置，不遵循ttl，会导致域名迁移时长尾流量，长时间不能被迁移走)。假设解析到的IP地址为1.1.1.1</p>
-<h4 id="访问该网站"><a href="#访问该网站" class="headerlink" title="访问该网站"></a>访问该网站</h4><h5 id="tcp建联"><a href="#tcp建联" class="headerlink" title="tcp建联"></a>tcp建联</h5><p>客户端启动一个随机端口(例如50000端口)访问1.1.1.1:80端口<br>1、发送客户端发送SYN到某台机器上(可能经过四层负载均衡)，此时客户端状态为SYN_SEND状态。<br>2、服务端收到SYN后回复SYN+ACK，服务器进入SYN_RECV状态<br>3、客户端回复ACK(双方进入ESTAB状态)</p>
-<h5 id="http-发送get请求"><a href="#http-发送get请求" class="headerlink" title="http 发送get请求"></a>http 发送get请求</h5><p>tcp建联之后客户端发送get请求到服务器上，其中包含host字段”www.baidu.com”、uri、http协议版本等信息</p>
-<h5 id="server端响应"><a href="#server端响应" class="headerlink" title="server端响应"></a>server端响应</h5><p>server端收到http请求后，根据host、uri等信息返回指定的内容。一般会保持长链接。</p>
+        <h2 id="请详细描述一下tcp四次断开的原理"><a href="#请详细描述一下tcp四次断开的原理" class="headerlink" title="请详细描述一下tcp四次断开的原理"></a>请详细描述一下tcp四次断开的原理</h2><h3 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h3><p>全双工： 数据能在两个方向上同时传递<br>半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。<br>MSL： (Maximum Segment Lifetime)报文最大生存时间。</p>
+<h3 id="四次关闭过程"><a href="#四次关闭过程" class="headerlink" title="四次关闭过程"></a>四次关闭过程</h3><p>一、主动关闭方生成ISN并向被动关闭方发送FIN、ISN，代表本地已经发送完所有数据，等待关闭。主动关闭状态由established变为FIN-WAIT1。<br>二、被动关闭方收到FIN、ISN后，回复ACK(ACK=ISN+1)，并等待本地数据发送完成，此时被动关闭状态由established变为CLOSE_WAIT，主动关闭状态由FIN-WAIT1变为FIN-WAIT2。<br>三、被动关闭方发送完所有数据后生成ISN并向主动关闭方发送FIN+ISN。此时被动关闭状态由CLOSE_WAIT变为LAST-ACK。<br>四、主动关闭方收到FIN+ISN后回复ACK(ACK=ISN+1)，此时状态为TIME-WAIT，等待2MSL的时间后关闭连接此时状态为CLOSED<br>五、被动关闭方收到ACK后关闭连接，状态变为CLOSED</p>
+<p>连接断开</p>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1519793355654&amp;di=1280d278241b90e99896118c0ba191df&amp;imgtype=0&amp;src=http%3A%2F%2Fs6.sinaimg.cn%2Fmw690%2F001az5G6gy6GswUJvVz85%26690" alt="如图"></p>
+<h3 id="关于四次断开常见的问题"><a href="#关于四次断开常见的问题" class="headerlink" title="关于四次断开常见的问题"></a>关于四次断开常见的问题</h3><p><strong>一、为什么TCP握手要三次、而断开要四次？</strong><br>答： 由于TCP是全双工的方式，两端都需要等待本地数据发送完成后才能彻底断开连接，<br><strong>二、为什么主动关闭方最后还要等待2MSL的时间而不直接关闭连接？</strong><br>答：主动关闭方无法确认被动关闭方是否收到了最后的ACK，等待2MSL的原因是防止被动方最终的ACK没有收到，被动方反复发送FIN。<strong>TIME-WAIT状态的端口不能被使用</strong></p>
 
       
     </div>
@@ -401,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/19/docker学习笔记/" rel="next" title="docker 学习笔记">
-                <i class="fa fa-chevron-left"></i> docker 学习笔记
+              <a href="/2018/02/27/TCP三次握手/" rel="next" title="TCP三次握手">
+                <i class="fa fa-chevron-left"></i> TCP三次握手
               </a>
             
           </div>
@@ -411,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/23/监控的内容/" rel="prev" title="监控相关">
-                监控相关 <i class="fa fa-chevron-right"></i>
+              <a href="/2222/12/21/联系、捐赠方式/" rel="prev" title="联系、捐赠方式">
+                联系、捐赠方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端响应</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#请详细描述一下tcp四次断开的原理"><span class="nav-number">1.</span> <span class="nav-text">请详细描述一下tcp四次断开的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键词解释"><span class="nav-number">1.1.</span> <span class="nav-text">关键词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次关闭过程"><span class="nav-number">1.2.</span> <span class="nav-text">四次关闭过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于四次断开常见的问题"><span class="nav-number">1.3.</span> <span class="nav-text">关于四次断开常见的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -656,9 +662,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'disqus_HU2NHxcrK3';
-      var disqus_identifier = '2018/01/19/一次完整的网站访问流程/';
+      var disqus_identifier = '2018/02/28/TCP四次断开/';
 
-      var disqus_title = "一次完整的网站访问流程";
+      var disqus_title = "TCP四次断开";
 
 
       function run_disqus_script(disqus_script) {
