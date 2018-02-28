@@ -93,7 +93,7 @@
 <meta property="og:description" content="请详细描述一下tcp四次断开的原理关键词解释全双工： 数据能在两个方向上同时传递半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。MSL： (Maximum Segment Lifetime)报文最大生存时间。
 四次关闭过程一、主动关闭方生成ISN并向被动关闭方发送FIN、ISN，代表本地已经发送完所有数据，等待关闭。主动关闭状态由established变为FIN-WAIT1。二">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519793355654&di=1280d278241b90e99896118c0ba191df&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmw690%2F001az5G6gy6GswUJvVz85%26690">
-<meta property="og:updated_time" content="2018-02-28T07:17:00.000Z">
+<meta property="og:updated_time" content="2018-02-28T07:42:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP四次断开">
 <meta name="twitter:description" content="请详细描述一下tcp四次断开的原理关键词解释全双工： 数据能在两个方向上同时传递半关闭： TCP提供了一端结束数据发送之后还能接收另一端数据的能力。MSL： (Maximum Segment Lifetime)报文最大生存时间。
@@ -375,6 +375,7 @@
 <p>连接断开</p>
 <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1519793355654&amp;di=1280d278241b90e99896118c0ba191df&amp;imgtype=0&amp;src=http%3A%2F%2Fs6.sinaimg.cn%2Fmw690%2F001az5G6gy6GswUJvVz85%26690" alt="如图"></p>
 <h3 id="关于四次断开常见的问题"><a href="#关于四次断开常见的问题" class="headerlink" title="关于四次断开常见的问题"></a>关于四次断开常见的问题</h3><p><strong>一、为什么TCP握手要三次、而断开要四次？</strong><br>答： 由于TCP是全双工的方式，两端都需要等待本地数据发送完成后才能彻底断开连接，<br><strong>二、为什么主动关闭方最后还要等待2MSL的时间而不直接关闭连接？</strong><br>答：主动关闭方无法确认被动关闭方是否收到了最后的ACK，等待2MSL的原因是防止被动方最终的ACK没有收到，被动方反复发送FIN。<strong>TIME-WAIT状态的端口不能被使用</strong></p>
+<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
 
       
     </div>

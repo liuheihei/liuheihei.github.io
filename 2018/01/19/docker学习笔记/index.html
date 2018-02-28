@@ -94,7 +94,7 @@
 <meta property="og:description" content="docker 学习笔记一、 概念篇1.1 docker 背后的内核知识1.1.1 资源隔离docker使用namespace、cgroup、copy-on-write分别实现了资源隔离、资源限制、高效的文件操作。
 在同一个namespace下的进程可以感知彼此的变化，而在不同的namespace下的进程无法感知。
 12问题： 我的印象的记得linux系统中每个进程都认为自己是系统中独一无二的进程。">
-<meta property="og:updated_time" content="2018-02-19T11:30:37.000Z">
+<meta property="og:updated_time" content="2018-02-28T07:42:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker 学习笔记">
 <meta name="twitter:description" content="docker 学习笔记一、 概念篇1.1 docker 背后的内核知识1.1.1 资源隔离docker使用namespace、cgroup、copy-on-write分别实现了资源隔离、资源限制、高效的文件操作。
@@ -394,9 +394,10 @@
 <ul>
 <li>UTS(UNIX Time-sharing System)提供主机名、域名的隔离</li>
 <li>IPC(Inter-Process Communication)进程间通信资源隔离<br>  主要特性：<br>  1、不同IPCNS下进程无法相互感知。<br>  2、容器与宿主机、容器与容器间。</li>
-<li>PIDNS<br>  内核为所有的NS维护了一个树状结构，最顶层的时系统初始的时候创建的(root namespace)，后创建pid namespace被称为child namespace,父NS可以看到子NS的进程，并可以发送各种信号，子进程则不可以。<br>  主要特性：<br>  1、每一个PIDNS中都有一个PID为1的进程，该进程和传统init进程有相同的特性。<br>  2、每个PIDNS都不可能影响到其他PIDNS中的进程(root namespace)除外。<br>  3、在PIDNS中，若出现孤儿进程，该进程会交付给该PIDNS下的init进程，而并非会交付给root namespace下的init进程来管理。<br>  4、在PIDNS中的init进程，具有信号屏蔽功能，防止init进程被误杀。<br>  5、</li>
+<li>PIDNS<br>  内核为所有的NS维护了一个树状结构，最顶层的时系统初始的时候创建的(root namespace)，后创建pid namespace被称为child namespace,父NS可以看到子NS的进程，并可以发送各种信号，子进程则不可以。<br>  主要特性：<br>  1、每一个PIDNS中都有一个PID为1的进程，该进程和传统init进程有相同的特性。<br>  2、每个PIDNS都不可能影响到其他PIDNS中的进程(root namespace)除外。<br>  3、在PIDNS中，若出现孤儿进程，该进程会交付给该PIDNS下的init进程，而并非会交付给root namespace下的init进程来管理。<br>  4、在PIDNS中的init进程，具有信号屏蔽功能，防止init进程被误杀。</li>
 </ul>
-
+<pre><code>[联系、捐赠方式](https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/).
+</code></pre>
       
     </div>
 
@@ -428,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/19/linux启动流程/" rel="next" title="linux 启动流程">
-                <i class="fa fa-chevron-left"></i> linux 启动流程
+              <a href="/2017/11/25/数据结构笔记-图/" rel="next" title="数据结构">
+                <i class="fa fa-chevron-left"></i> 数据结构
               </a>
             
           </div>
@@ -438,8 +439,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/19/一次完整的网站访问流程/" rel="prev" title="一次完整的网站访问流程">
-                一次完整的网站访问流程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/19/linux启动流程/" rel="prev" title="linux 启动流程">
+                linux 启动流程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

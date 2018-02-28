@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="你们监控系统的监控项有哪些？业务相关1: nginx的总请求数(count/s)2: nginx http的总请求数(count/s)3: nginx https的总请求数(count/s)4: nginx的各种错误码、4XX、5XX5: nginx平均响应时间6: nginx大于1s/5s的请求数7: logfwdr日志的drop、接收、发送的数量8: load9: tcp连接数
 网络相关在全国">
-<meta property="og:updated_time" content="2018-02-23T14:42:27.000Z">
+<meta property="og:updated_time" content="2018-02-28T07:43:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控相关">
 <meta name="twitter:description" content="你们监控系统的监控项有哪些？业务相关1: nginx的总请求数(count/s)2: nginx http的总请求数(count/s)3: nginx https的总请求数(count/s)4: nginx的各种错误码、4XX、5XX5: nginx平均响应时间6: nginx大于1s/5s的请求数7: logfwdr日志的drop、接收、发送的数量8: load9: tcp连接数
@@ -374,6 +374,7 @@
 <h3 id="外部监控"><a href="#外部监控" class="headerlink" title="外部监控"></a>外部监控</h3><p>在全国各个探测点模拟实际用户请求，对各个节点发起探测，并根据探测结果下线IP or 机房。</p>
 <h3 id="告警升级"><a href="#告警升级" class="headerlink" title="告警升级"></a>告警升级</h3><p>针对重要服务，30分钟内未恢复自动将告警发送至部门主管。</p>
 <h4 id="如何解决数据量过大，监控服务器扛不住问题？"><a href="#如何解决数据量过大，监控服务器扛不住问题？" class="headerlink" title="如何解决数据量过大，监控服务器扛不住问题？"></a>如何解决数据量过大，监控服务器扛不住问题？</h4><p>所有的节点按照agent,将metric数据发送到统一一个域名，交付给kafka,然后将部分有用数据录入influxDB,然后由grafana进行展示。</p>
+<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
 
       
     </div>
