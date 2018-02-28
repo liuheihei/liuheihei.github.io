@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="请详细描述一下tcp三次握手的原理关键词解释ISN(Initial Sequence Number)： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519751805044&di=9d6c39b029a00c77cac9fe385ed92eac&imgtype=0&src=http%3A%2F%2Fimg1.51cto.com%2Fattachment%2F201308%2F194031521.png">
-<meta property="og:updated_time" content="2018-02-27T14:31:20.000Z">
+<meta property="og:updated_time" content="2018-02-28T01:43:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP三次握手">
 <meta name="twitter:description" content="请详细描述一下tcp三次握手的原理关键词解释ISN(Initial Sequence Number)： 初始序列号32位计数器(0-4294967295)，系统在初次启动时会将该编号重置为0，每500ms增加64000，保证序列号不重复，(老式生成方法这种方式并不安全下面会介绍)。新式生成ISN方法，M代表生成的计数器编号，F代表函数(md5、md4)，IP四元祖(源目ip\port)。 ISN">
@@ -414,8 +414,8 @@
     C冒充服务器B向服务器A发起链接请求。
     1) C 6666端口向A 8888端口发起链接请求，此时数据包内容为(源IP为B，源端口为6666,目的IP为A,目的端口为8888， ISN为C生成的ISN)
     2) C 启动9999端口向A 10000端口发起链接请求，此时数据包内容为(源IP为C，源端口为9999,目的IP为A,目的端口为10000， ISN为C生成的ISN)
-    3) A收到这个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
-    4) A收到这个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
+    3) A收到第二个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
+    4) A收到第一个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
     5) C 冒充B向A发送ACK，此时内容为(源IP为B，源端口为6666,目的IP为A，目的端口为8888，ACK为计算出的ISN号+1)
     此时链接建立。
 </code></pre>

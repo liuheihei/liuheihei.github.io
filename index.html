@@ -415,8 +415,8 @@
     C冒充服务器B向服务器A发起链接请求。
     1) C 6666端口向A 8888端口发起链接请求，此时数据包内容为(源IP为B，源端口为6666,目的IP为A,目的端口为8888， ISN为C生成的ISN)
     2) C 启动9999端口向A 10000端口发起链接请求，此时数据包内容为(源IP为C，源端口为9999,目的IP为A,目的端口为10000， ISN为C生成的ISN)
-    3) A收到这个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
-    4) A收到这个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
+    3) A收到第二个SYN包后会向C发送SYN+ACK此时数据包内容为(源IP为A，源端口为10000，目的IP为B，目的端口为9999，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）
+    4) A收到第一个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
     5) C 冒充B向A发送ACK，此时内容为(源IP为B，源端口为6666,目的IP为A，目的端口为8888，ACK为计算出的ISN号+1)
     此时链接建立。
 </code></pre>
@@ -1112,6 +1112,212 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/11/25/数据结构笔记-图/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="liuheihei">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/25/数据结构笔记-图/" itemprop="url">
+                  数据结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2017-11-25T18:55:43+08:00">
+                2017-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/25/数据结构笔记-图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/25/数据结构笔记-图/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><h5 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h5><p><strong>图</strong>：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。</p>
+<p>图就是由一堆点和一堆线组成，其中图中的元素叫做<strong>顶点</strong>，图中不可以没有元素，各个顶点之间的逻辑关系由<strong>边</strong>来表示。</p>
+<p><strong>图的类型</strong></p>
+<ul>
+<li><p>简单图<br>定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。</p>
+</li>
+<li><p>无向图</p>
+<p>无向边： 顶点<strong>V1–&gt;V2</strong>之间的边没有方向，则称这条边(V1,v2)为无向边。表示为(V1, V2)或者(V2, V1)。<br><strong>无向边用小括号表示。</strong><br>无向图定义： 在图中<strong>任意</strong>两个顶点之间的边都是无向边。</p>
+<ul>
+<li>无向完全图<br>定义： 在无向图中，每个顶点之间都存在一条无向边称为无向完全图。无向完全图由n*(n-1)/2条边。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>有向图<br>有向边： 顶点<strong>V1–&gt;V2</strong>之间的边有方向，假设由V1指向V2，则这条边被称为有向边或者弧，V1称为弧头，V2称为弧尾。表示为”&lt; V1, V2&gt;”，不可写为’(V2, V1)’。</p>
+<p><strong>有向边用”&lt;&gt;”表示。</strong></p>
+<p>有向图： 在图中<strong>任意</strong>两个顶点之间的边都是有向的。</p>
+<ul>
+<li>有向完全图<br>定义： 在任意两个顶点之间都存在两条方向互为相反的弧，则称改图为有向完全图。</li>
+</ul>
+</li>
+</ul>
+<p><strong>网</strong>： 图的边带有权重，叫做网。</p>
+<p><strong>子图</strong>： 存在两个图，G1(V1, {E1})和G2(V2, {E2}),当V1包含于V2且E1包含于E2，则说明G1是G2的子图。</p>
+<p><strong>图的边与顶点的关系</strong></p>
+<ul>
+<li><p>无向图<br>对于无向图G(V, {E}),如果顶点V1, V2之间的边(V1, V2)包含于E， 则称两个顶点相邻接。边(V1, V2)依附于顶点V1，V2。</p>
+<p>度（TD）：顶点V1的度是和V1相关联边的数目。</p>
+</li>
+<li><p>有向图<br>对于有向图G(V, {E}),如果弧<v1, v2="">包含于E，则称顶点V1临接到V2，或者称顶点V2临接于V1。弧<v1，v2>和V1,V2相关联。</v1，v2></v1,></p>
+<p>出度（OD）：以V为尾的弧的数目称之为V的出度。<br>入度（ID）：以V为头的弧的数目称之为V的入度。<br>度（TD）：OD+ID</p>
+</li>
+</ul>
+<p><strong>简单回路（环）</strong>：从第一个顶点到最后一个顶点的路径叫做回路或者环，如果这个回路中除了第一个顶点和最后一个顶点之外没有重复的回路，被称之为简单回路。（小时候玩的一笔画完称之为简单回路（差别是不需要全部顶点都包含在内））</p>
+<p><strong>连通图</strong>：在图G中如果在图中任意两个顶点都是连通的，被称之为连通图。</p>
+<p><strong>连通分量</strong>：无向图中极大连通子图称为连通分量。</p>
+<ul>
+<li>要是子图</li>
+<li>子图要连通</li>
+<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
+<li>具有极大顶点数的连通子图包含依附于这些顶点的所有边</li>
+</ul>
+<p><strong>强连通图</strong>：有向图中每一对V1、V2，从V1–&gt;V2、V2–&gt;V1都存在路径，则称图G是强连通图。</p>
+<p><strong>强连通分量</strong>：有向图中的极大强连通子图称为强连通分量。</p>
+<ul>
+<li>要是子图</li>
+<li>子图要连通</li>
+<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
+<li>具有极大顶点数的连通子图包含依附于这些顶点的所有弧</li>
+</ul>
+<p><strong>无向连通图的生成树</strong>：就是把一个连通图用树的方式展现出来。包含全部n个顶点，并且边数为n-1</p>
+<p><strong>有向图的生成树</strong>：有向图中如果有一个顶点入度为0，其余入度都为1，则该图是一颗有向生成树。</p>
+<p><strong>有向图的生成森林</strong>：一个有向图由若干课数组成的森林，该森林包含所有顶点。</p>
+<h5 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h5><p><strong>深度优先遍历</strong></p>
+<p>从某个顶点开始，依次访问与此顶点连通的顶点且未被遍历过的顶点，若下个遍历有多个选择，则优先访问右侧顶点，若所有顶点都被遍历过，则返回到未被访问到的顶点继续遍历。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/11/25/数据结构笔记-树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1325,212 +1531,6 @@
 <p><strong>赫夫曼树定义</strong>：如果考虑带权的结点、那么数的带权路径长度为各个结点的权数乘以路径长度的和，当这个数值最小时，被称之为赫夫曼树。</p>
 <p><strong>赫夫曼树的生成方法</strong>：根据权重进行排列组合，每次选取最小的两个结点，将他们合并为一个新的结点，其中较小的一个作为新结点的左子树，将新生成的结点代替老的两个结点继续生成一个新的结点，一直到全部生成。</p>
 <p><strong>赫夫曼编码</strong>：赫夫曼树主要用于数据传递，传递字符串时可通过每个字符出现的频率来生存一个赫夫曼二叉树，将编码原来的统一字符串编码改为由根结点到各个叶结点的路径(左子树标为0右子树标为1)生成一组新的编码。新生成的编码长度小于统一字符串编码发送时所需要的长度。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2017/11/25/数据结构笔记-图/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="liuheihei">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/25/数据结构笔记-图/" itemprop="url">
-                  数据结构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2017-11-25T18:55:43+08:00">
-                2017-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/25/数据结构笔记-图/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/25/数据结构笔记-图/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><h5 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h5><p><strong>图</strong>：图是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为：G(V，E)其中，G表示一个图，V是G中顶点的集合，E是图G中，边的集合。</p>
-<p>图就是由一堆点和一堆线组成，其中图中的元素叫做<strong>顶点</strong>，图中不可以没有元素，各个顶点之间的逻辑关系由<strong>边</strong>来表示。</p>
-<p><strong>图的类型</strong></p>
-<ul>
-<li><p>简单图<br>定义： 若不存在顶点到其自身的边，且不存在重复的边，被称之为简单图。</p>
-</li>
-<li><p>无向图</p>
-<p>无向边： 顶点<strong>V1–&gt;V2</strong>之间的边没有方向，则称这条边(V1,v2)为无向边。表示为(V1, V2)或者(V2, V1)。<br><strong>无向边用小括号表示。</strong><br>无向图定义： 在图中<strong>任意</strong>两个顶点之间的边都是无向边。</p>
-<ul>
-<li>无向完全图<br>定义： 在无向图中，每个顶点之间都存在一条无向边称为无向完全图。无向完全图由n*(n-1)/2条边。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>有向图<br>有向边： 顶点<strong>V1–&gt;V2</strong>之间的边有方向，假设由V1指向V2，则这条边被称为有向边或者弧，V1称为弧头，V2称为弧尾。表示为”&lt; V1, V2&gt;”，不可写为’(V2, V1)’。</p>
-<p><strong>有向边用”&lt;&gt;”表示。</strong></p>
-<p>有向图： 在图中<strong>任意</strong>两个顶点之间的边都是有向的。</p>
-<ul>
-<li>有向完全图<br>定义： 在任意两个顶点之间都存在两条方向互为相反的弧，则称改图为有向完全图。</li>
-</ul>
-</li>
-</ul>
-<p><strong>网</strong>： 图的边带有权重，叫做网。</p>
-<p><strong>子图</strong>： 存在两个图，G1(V1, {E1})和G2(V2, {E2}),当V1包含于V2且E1包含于E2，则说明G1是G2的子图。</p>
-<p><strong>图的边与顶点的关系</strong></p>
-<ul>
-<li><p>无向图<br>对于无向图G(V, {E}),如果顶点V1, V2之间的边(V1, V2)包含于E， 则称两个顶点相邻接。边(V1, V2)依附于顶点V1，V2。</p>
-<p>度（TD）：顶点V1的度是和V1相关联边的数目。</p>
-</li>
-<li><p>有向图<br>对于有向图G(V, {E}),如果弧<v1, v2="">包含于E，则称顶点V1临接到V2，或者称顶点V2临接于V1。弧<v1，v2>和V1,V2相关联。</v1，v2></v1,></p>
-<p>出度（OD）：以V为尾的弧的数目称之为V的出度。<br>入度（ID）：以V为头的弧的数目称之为V的入度。<br>度（TD）：OD+ID</p>
-</li>
-</ul>
-<p><strong>简单回路（环）</strong>：从第一个顶点到最后一个顶点的路径叫做回路或者环，如果这个回路中除了第一个顶点和最后一个顶点之外没有重复的回路，被称之为简单回路。（小时候玩的一笔画完称之为简单回路（差别是不需要全部顶点都包含在内））</p>
-<p><strong>连通图</strong>：在图G中如果在图中任意两个顶点都是连通的，被称之为连通图。</p>
-<p><strong>连通分量</strong>：无向图中极大连通子图称为连通分量。</p>
-<ul>
-<li>要是子图</li>
-<li>子图要连通</li>
-<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
-<li>具有极大顶点数的连通子图包含依附于这些顶点的所有边</li>
-</ul>
-<p><strong>强连通图</strong>：有向图中每一对V1、V2，从V1–&gt;V2、V2–&gt;V1都存在路径，则称图G是强连通图。</p>
-<p><strong>强连通分量</strong>：有向图中的极大强连通子图称为强连通分量。</p>
-<ul>
-<li>要是子图</li>
-<li>子图要连通</li>
-<li>连通的子图需要<strong>包含能连通的所有顶点</strong></li>
-<li>具有极大顶点数的连通子图包含依附于这些顶点的所有弧</li>
-</ul>
-<p><strong>无向连通图的生成树</strong>：就是把一个连通图用树的方式展现出来。包含全部n个顶点，并且边数为n-1</p>
-<p><strong>有向图的生成树</strong>：有向图中如果有一个顶点入度为0，其余入度都为1，则该图是一颗有向生成树。</p>
-<p><strong>有向图的生成森林</strong>：一个有向图由若干课数组成的森林，该森林包含所有顶点。</p>
-<h5 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h5><p><strong>深度优先遍历</strong></p>
-<p>从某个顶点开始，依次访问与此顶点连通的顶点且未被遍历过的顶点，若下个遍历有多个选择，则优先访问右侧顶点，若所有顶点都被遍历过，则返回到未被访问到的顶点继续遍历。</p>
 
           
         
