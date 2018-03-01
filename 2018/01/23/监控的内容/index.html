@@ -92,11 +92,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="你们监控系统的监控项有哪些？业务相关1: nginx的总请求数(count/s)2: nginx http的总请求数(count/s)3: nginx https的总请求数(count/s)4: nginx的各种错误码、4XX、5XX5: nginx平均响应时间6: nginx大于1s/5s的请求数7: logfwdr日志的drop、接收、发送的数量8: load9: tcp连接数
 网络相关在全国">
-<meta property="og:updated_time" content="2018-02-28T07:43:12.000Z">
+<meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
+<meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png">
+<meta property="og:updated_time" content="2018-02-28T13:49:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控相关">
 <meta name="twitter:description" content="你们监控系统的监控项有哪些？业务相关1: nginx的总请求数(count/s)2: nginx http的总请求数(count/s)3: nginx https的总请求数(count/s)4: nginx的各种错误码、4XX、5XX5: nginx平均响应时间6: nginx大于1s/5s的请求数7: logfwdr日志的drop、接收、发送的数量8: load9: tcp连接数
 网络相关在全国">
+<meta name="twitter:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
 
 
 
@@ -374,7 +377,9 @@
 <h3 id="外部监控"><a href="#外部监控" class="headerlink" title="外部监控"></a>外部监控</h3><p>在全国各个探测点模拟实际用户请求，对各个节点发起探测，并根据探测结果下线IP or 机房。</p>
 <h3 id="告警升级"><a href="#告警升级" class="headerlink" title="告警升级"></a>告警升级</h3><p>针对重要服务，30分钟内未恢复自动将告警发送至部门主管。</p>
 <h4 id="如何解决数据量过大，监控服务器扛不住问题？"><a href="#如何解决数据量过大，监控服务器扛不住问题？" class="headerlink" title="如何解决数据量过大，监控服务器扛不住问题？"></a>如何解决数据量过大，监控服务器扛不住问题？</h4><p>所有的节点按照agent,将metric数据发送到统一一个域名，交付给kafka,然后将部分有用数据录入influxDB,然后由grafana进行展示。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
       
     </div>
@@ -505,7 +510,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -549,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你们监控系统的监控项有哪些？"><span class="nav-number">1.</span> <span class="nav-text">你们监控系统的监控项有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务相关"><span class="nav-number">1.1.</span> <span class="nav-text">业务相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络相关"><span class="nav-number">1.2.</span> <span class="nav-text">网络相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部监控"><span class="nav-number">1.3.</span> <span class="nav-text">外部监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#告警升级"><span class="nav-number">1.4.</span> <span class="nav-text">告警升级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何解决数据量过大，监控服务器扛不住问题？"><span class="nav-number">1.4.1.</span> <span class="nav-text">如何解决数据量过大，监控服务器扛不住问题？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你们监控系统的监控项有哪些？"><span class="nav-number">1.</span> <span class="nav-text">你们监控系统的监控项有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务相关"><span class="nav-number">1.1.</span> <span class="nav-text">业务相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络相关"><span class="nav-number">1.2.</span> <span class="nav-text">网络相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部监控"><span class="nav-number">1.3.</span> <span class="nav-text">外部监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#告警升级"><span class="nav-number">1.4.</span> <span class="nav-text">告警升级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何解决数据量过大，监控服务器扛不住问题？"><span class="nav-number">1.4.1.</span> <span class="nav-text">如何解决数据量过大，监控服务器扛不住问题？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客官请打赏"><span class="nav-number">1.5.</span> <span class="nav-text">客官请打赏</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2222/12/21/联系、捐赠方式/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/02/28/TCP backlog/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -281,8 +281,8 @@
             
               
                 
-                <a class="post-title-link" href="/2222/12/21/联系、捐赠方式/" itemprop="url">
-                  联系、捐赠方式
+                <a class="post-title-link" href="/2018/02/28/TCP backlog/" itemprop="url">
+                  TCP Backlog
                 </a>
               
             
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2222-12-21T15:23:43+08:00">
-                2222-12-21
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-02-28T20:23:43+08:00">
+                2018-02-28
               </time>
             
 
@@ -321,8 +321,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/要饭/" itemprop="url" rel="index">
-                    <span itemprop="name">要饭</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -339,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2222/12/21/联系、捐赠方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2222/12/21/联系、捐赠方式/" itemprop="commentCount"></span>
+                <a href="/2018/02/28/TCP backlog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/28/TCP backlog/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,8 +368,23 @@
       
         
           
-            <p>本人QQ： 378867598</p>
-<p>如果博客中有什么地方错误或者疏漏，请及时联系我。<br>支持微信、支付宝捐赠 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
+            <h1 id="TCP-Backlog"><a href="#TCP-Backlog" class="headerlink" title="TCP Backlog"></a>TCP Backlog</h1><h3 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h3><p>Backlog: 挤压值</p>
+<h3 id="TCP-Backlog-是什么？"><a href="#TCP-Backlog-是什么？" class="headerlink" title="TCP Backlog 是什么？"></a>TCP Backlog 是什么？</h3><ul>
+<li>等待连接请求的一段有一个固定长度的队列，该队列中的连接已经被TCP连接所接受，但是并未被应用层程序接受。</li>
+<li>当该队列满时，TCP会直接<strong>丢弃</strong>所收到的SYN连接请求，直到队列中已被接受的请求被应用程序取走，不返回RST也不返回ACK。</li>
+<li>backlog队列的大小不代表最大连接数。只代表已被TCP接受但并未被应用程序处理的最大连接数。</li>
+<li>可以看作是最大并发数</li>
+</ul>
+<p>在Linux中有存在两个队列，一个为<strong>半连接队列(SYN QUEUE)</strong>,一个为<strong>ACCEPT队列</strong>。</p>
+<p>三次建联过程：</p>
+<ul>
+<li>在三次握手中当服务器接收到SYN请求后，如果server的SYN QUEUE队列已满，直接丢弃该SYN包，反之则将该请求放入SYN QUEUE队列中，并回复SYN+ACK</li>
+<li>在ACCEPT队列未满时，server再次收到ACK后将该请求放入ACCEPT队列中，等待应用程序取走。当在ACCEPT队列满时，取决于<strong>tcp_aborton_overflow</strong>参数，当该参数为1时，会发送RST，当为0时(默认)，直接丢弃最后的ACK报文。</li>
+</ul>
+<h3 id="修改Linux参数"><a href="#修改Linux参数" class="headerlink" title="修改Linux参数"></a>修改Linux参数</h3><p>用于保存半连接状态的请求，通过修改<strong>/proc/sys/net/ipv4/tcp_max_syn_backlog</strong>指定。<br>用于修改ACCEPT队列的请求，通过修改<strong>/proc/sys/net/core/somaxconn</strong>指定。</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -528,7 +543,9 @@
 <h5 id="同时断开"><a href="#同时断开" class="headerlink" title="同时断开"></a>同时断开</h5><p><strong>A B两服务器同时向对方发起关闭操作</strong><br>一、AB同时发送FIN，并进入FIN-WAIT1状态<br>二、AB收到FIN后，将状态改为CLOSE_WAIT状态，并发送ACK<br>三、AB进入TIME-WAIT状态</p>
 <p><img src="http://hi.csdn.net/attachment/201101/10/0_12946239302WOU.gif" alt="如图"></p>
 <h3 id="关于四次断开常见的问题"><a href="#关于四次断开常见的问题" class="headerlink" title="关于四次断开常见的问题"></a>关于四次断开常见的问题</h3><p><strong>一、为什么TCP握手要三次、而断开要四次？</strong><br>答： 由于TCP是全双工的方式，两端都需要等待本地数据发送完成后才能彻底断开连接，<br><strong>二、为什么主动关闭方最后还要等待2MSL的时间而不直接关闭连接？</strong><br>答：主动关闭方无法确认被动关闭方是否收到了最后的ACK，等待2MSL的原因是防止被动方最终的ACK没有收到，被动方反复发送FIN。<strong>TIME-WAIT状态的端口不能被使用</strong><br><strong>三、假设你要重启一个nginx服务80端口，此时主动断开的是服务器端，所以在此启动80端口需要等待2MSL的时间才能重启（一般1-4分钟，根据四次断开的说明此时服务器80端口状态为TIME-WAIT,此时端口被再次使用）但是实际应用中确并不是这样，请解释下原因</strong><br>答： 重启nginx服务的情况下，过程并非是正常状态下的端口动作，此时服务器端会向客户端发送一个RST而不是一个正常的FIN，RST中包含一个序号和确认序号，客户端收到RST后不会进行任何响应，直接通知应用层复位该链接。如果客户端没收到RST，那么客户端会在下一次请求服务器是得到RST。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -730,7 +747,9 @@
     4) A收到第一个SYN包后会向B发送SYN+ACK此时数据包内容为(源IP为A，源端口为8888，目的端口为B，目的端口为6666，ACK号为C生成的ISN+1，A发送的ISN为由时间递增的序列号）这个包C无法收到。但是C可以根据3⃣️中得到的ISN号计算出当前的ISN号.
     5) C 冒充B向A发送ACK，此时内容为(源IP为B，源端口为6666,目的IP为A，目的端口为8888，ACK为计算出的ISN号+1)
     此时链接建立。
-</code></pre><p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+</code></pre><h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -887,7 +906,9 @@
 <h3 id="外部监控"><a href="#外部监控" class="headerlink" title="外部监控"></a>外部监控</h3><p>在全国各个探测点模拟实际用户请求，对各个节点发起探测，并根据探测结果下线IP or 机房。</p>
 <h3 id="告警升级"><a href="#告警升级" class="headerlink" title="告警升级"></a>告警升级</h3><p>针对重要服务，30分钟内未恢复自动将告警发送至部门主管。</p>
 <h4 id="如何解决数据量过大，监控服务器扛不住问题？"><a href="#如何解决数据量过大，监控服务器扛不住问题？" class="headerlink" title="如何解决数据量过大，监控服务器扛不住问题？"></a>如何解决数据量过大，监控服务器扛不住问题？</h4><p>所有的节点按照agent,将metric数据发送到统一一个域名，交付给kafka,然后将部分有用数据录入influxDB,然后由grafana进行展示。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -1042,7 +1063,9 @@
 <h4 id="访问该网站"><a href="#访问该网站" class="headerlink" title="访问该网站"></a>访问该网站</h4><h5 id="tcp建联"><a href="#tcp建联" class="headerlink" title="tcp建联"></a>tcp建联</h5><p>客户端启动一个随机端口(例如50000端口)访问1.1.1.1:80端口<br>1、发送客户端发送SYN到某台机器上(可能经过四层负载均衡)，此时客户端状态为SYN_SEND状态。<br>2、服务端收到SYN后回复SYN+ACK，服务器进入SYN_RECV状态<br>3、客户端回复ACK(双方进入ESTAB状态)</p>
 <h5 id="http-发送get请求"><a href="#http-发送get请求" class="headerlink" title="http 发送get请求"></a>http 发送get请求</h5><p>tcp建联之后客户端发送get请求到服务器上，其中包含host字段”www.baidu.com”、uri、http协议版本等信息</p>
 <h5 id="server端响应"><a href="#server端响应" class="headerlink" title="server端响应"></a>server端响应</h5><p>server端收到http请求后，根据host、uri等信息返回指定的内容。一般会保持长链接。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -1213,10 +1236,10 @@
 13:弹出登录框
 14:用户登录时根据/etc/passwd校验密码并获取uid,gid,bash,家目录等
 15:加载/etc/bashrc /etc/bash.profile ~/.bashrc ~/.bashprofile 获取环境变量
+</code></pre><h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
-
-[联系、捐赠方式](https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/).
-</code></pre>
           
         
       
@@ -1391,8 +1414,10 @@
 <li>IPC(Inter-Process Communication)进程间通信资源隔离<br>  主要特性：<br>  1、不同IPCNS下进程无法相互感知。<br>  2、容器与宿主机、容器与容器间。</li>
 <li>PIDNS<br>  内核为所有的NS维护了一个树状结构，最顶层的时系统初始的时候创建的(root namespace)，后创建pid namespace被称为child namespace,父NS可以看到子NS的进程，并可以发送各种信号，子进程则不可以。<br>  主要特性：<br>  1、每一个PIDNS中都有一个PID为1的进程，该进程和传统init进程有相同的特性。<br>  2、每个PIDNS都不可能影响到其他PIDNS中的进程(root namespace)除外。<br>  3、在PIDNS中，若出现孤儿进程，该进程会交付给该PIDNS下的init进程，而并非会交付给root namespace下的init进程来管理。<br>  4、在PIDNS中的init进程，具有信号屏蔽功能，防止init进程被误杀。</li>
 </ul>
-<pre><code>[联系、捐赠方式](https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/).
-</code></pre>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
+
           
         
       
@@ -1598,7 +1623,9 @@
 <p><strong>有向图的生成森林</strong>：一个有向图由若干课数组成的森林，该森林包含所有顶点。</p>
 <h5 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h5><p><strong>深度优先遍历</strong></p>
 <p>从某个顶点开始，依次访问与此顶点连通的顶点且未被遍历过的顶点，若下个遍历有多个选择，则优先访问右侧顶点，若所有顶点都被遍历过，则返回到未被访问到的顶点继续遍历。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -1850,7 +1877,9 @@
 <p><strong>赫夫曼树定义</strong>：如果考虑带权的结点、那么数的带权路径长度为各个结点的权数乘以路径长度的和，当这个数值最小时，被称之为赫夫曼树。</p>
 <p><strong>赫夫曼树的生成方法</strong>：根据权重进行排列组合，每次选取最小的两个结点，将他们合并为一个新的结点，其中较小的一个作为新结点的左子树，将新生成的结点代替老的两个结点继续生成一个新的结点，一直到全部生成。</p>
 <p><strong>赫夫曼编码</strong>：赫夫曼树主要用于数据传递，传递字符串时可通过每个字符出现的频率来生存一个赫夫曼二叉树，将编码原来的统一字符串编码改为由根结点到各个叶结点的路径(左子树标为0右子树标为1)生成一组新的编码。新生成的编码长度小于统一字符串编码发送时所需要的长度。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -2073,7 +2102,9 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
 因此yum update 可以更保守的管理包，但是yum upgrade 会保持包的状态是最新的。
 </code></pre><p>查询某个文件哪个包存在</p>
 <pre><code>$ yum provides &quot;*/&lt;filename&gt;&quot;
-</code></pre><p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+</code></pre><h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
           
         
@@ -2159,7 +2190,7 @@ yum upgrade  会升级包到最新到版本，举个例子，foo 新版改名为
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

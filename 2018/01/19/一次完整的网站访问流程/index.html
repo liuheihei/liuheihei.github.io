@@ -90,10 +90,13 @@
 <meta property="og:url" content="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
-<meta property="og:updated_time" content="2018-02-28T07:42:54.000Z">
+<meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
+<meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png">
+<meta property="og:updated_time" content="2018-02-28T13:49:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次完整的网站访问流程">
 <meta name="twitter:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="twitter:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
 
 
 
@@ -369,7 +372,9 @@
 <h4 id="访问该网站"><a href="#访问该网站" class="headerlink" title="访问该网站"></a>访问该网站</h4><h5 id="tcp建联"><a href="#tcp建联" class="headerlink" title="tcp建联"></a>tcp建联</h5><p>客户端启动一个随机端口(例如50000端口)访问1.1.1.1:80端口<br>1、发送客户端发送SYN到某台机器上(可能经过四层负载均衡)，此时客户端状态为SYN_SEND状态。<br>2、服务端收到SYN后回复SYN+ACK，服务器进入SYN_RECV状态<br>3、客户端回复ACK(双方进入ESTAB状态)</p>
 <h5 id="http-发送get请求"><a href="#http-发送get请求" class="headerlink" title="http 发送get请求"></a>http 发送get请求</h5><p>tcp建联之后客户端发送get请求到服务器上，其中包含host字段”www.baidu.com”、uri、http协议版本等信息</p>
 <h5 id="server端响应"><a href="#server端响应" class="headerlink" title="server端响应"></a>server端响应</h5><p>server端收到http请求后，根据host、uri等信息返回指定的内容。一般会保持长链接。</p>
-<p><a href="https://liuheihei.github.io/2222/12/21/%E8%81%94%E7%B3%BB%E3%80%81%E6%8D%90%E8%B5%A0%E6%96%B9%E5%BC%8F/">联系、捐赠方式</a>.</p>
+<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
+<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
+<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
 
       
     </div>
@@ -500,7 +505,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -544,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端响应</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客官请打赏"><span class="nav-number">2.</span> <span class="nav-text">客官请打赏</span></a></li></ol></div>
             
 
           </div>
