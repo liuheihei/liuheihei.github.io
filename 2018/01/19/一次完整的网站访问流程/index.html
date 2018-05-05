@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、    客户发起www.baidu.com解析。2、    本地域名服务器无cache记录并向根域名服务器发起www.baidu.com A记录请求。3、    根域名服务器向本地域名服务器返回.com NS记录以及其A记录。4、    本地域名服务器向.com域名服务器发起ww">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一次完整的网站访问流程">
 <meta property="og:url" content="http://liuheihei.github.io/2018/01/19/一次完整的网站访问流程/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta property="og:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、    客户发起www.baidu.com解析。2、    本地域名服务器无cache记录并向根域名服务器发起www.baidu.com A记录请求。3、    根域名服务器向本地域名服务器返回.com NS记录以及其A记录。4、    本地域名服务器向.com域名服务器发起ww">
 <meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
 <meta property="og:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png">
-<meta property="og:updated_time" content="2018-02-28T13:49:37.000Z">
+<meta property="og:updated_time" content="2018-05-05T02:44:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次完整的网站访问流程">
-<meta name="twitter:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、浏览器获取本地dns缓存、读取hosts文件2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则local DNS代替客户端以迭代的方式进行解析(默认)。首先">
+<meta name="twitter:description" content="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点查询DNS信息1、    客户发起www.baidu.com解析。2、    本地域名服务器无cache记录并向根域名服务器发起www.baidu.com A记录请求。3、    根域名服务器向本地域名服务器返回.com NS记录以及其A记录。4、    本地域名服务器向.com域名服务器发起ww">
 <meta name="twitter:image" content="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png">
 
 
@@ -368,10 +368,10 @@
       
 
       
-        <h3 id="当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><a href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点" class="headerlink" title="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"></a>当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</h3><h4 id="查询DNS信息"><a href="#查询DNS信息" class="headerlink" title="查询DNS信息"></a>查询DNS信息</h4><p>1、浏览器获取本地dns缓存、读取hosts文件<br>2、通过UDP协议将该域名发送到local DNS请求解析的IP，local DNS查询自己本地是否有已经缓存好的www.baidu.com的域名信息，如果有则返回，如果无则<strong>local DNS代替客户端以迭代的方式进行解析(默认)</strong>。首先请求管理.com域名的DNS服务器地址，.comDNS服务器回复管理baidu.com域名的DNS服务器地址，管理baidu.com的DNS回复www.baidu.com对应的IP地址，或者回复一个cname域名，如果回复一个cname域名那么将会重新执行以便上述的流程。local DNS会根据该域名配置的ttl参数来决定缓存该解析的时间。(有一部分DNS服务会遵循自己的配置，不遵循ttl，会导致域名迁移时长尾流量，长时间不能被迁移走)。假设解析到的IP地址为1.1.1.1</p>
+        <h3 id="当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><a href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点" class="headerlink" title="当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"></a>当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</h3><h4 id="查询DNS信息"><a href="#查询DNS信息" class="headerlink" title="查询DNS信息"></a>查询DNS信息</h4><p>1、    客户发起www.baidu.com解析。<br>2、    本地域名服务器无cache记录并向根域名服务器发起www.baidu.com A记录请求。<br>3、    根域名服务器向本地域名服务器返回.com NS记录以及其A记录。<br>4、    本地域名服务器向.com域名服务器发起www.baidu.com A记录请求。<br>5、    .com域名服务器向本地域名服务器返回baidu.com NS记录以及其A记录。<br>6、    本地域名服务器向baidu.com域名服务器发起www.baidu.com A记录请求。<br>7、    baidu.com域名服务器向本地域名服务器返回www.baidu.com CNAME记录,NS记录以及其域名服务器A记录。<br>8、    本地域名服务器向a.shifen.com域名服务器发起www.a.shifen.com A记录请求。<br>9、    a.shifen.com域名服务器向返回本地域名服务器最终结果。<br>10、    本地域名服务器向DNS客户端返回最终结果。</p>
 <h4 id="访问该网站"><a href="#访问该网站" class="headerlink" title="访问该网站"></a>访问该网站</h4><h5 id="tcp建联"><a href="#tcp建联" class="headerlink" title="tcp建联"></a>tcp建联</h5><p>客户端启动一个随机端口(例如50000端口)访问1.1.1.1:80端口<br>1、发送客户端发送SYN到某台机器上(可能经过四层负载均衡)，此时客户端状态为SYN_SEND状态。<br>2、服务端收到SYN后回复SYN+ACK，服务器进入SYN_RECV状态<br>3、客户端回复ACK(双方进入ESTAB状态)</p>
 <h5 id="http-发送get请求"><a href="#http-发送get请求" class="headerlink" title="http 发送get请求"></a>http 发送get请求</h5><p>tcp建联之后客户端发送get请求到服务器上，其中包含host字段”www.baidu.com”、uri、http协议版本等信息</p>
-<h5 id="server端响应"><a href="#server端响应" class="headerlink" title="server端响应"></a>server端响应</h5><p>server端收到http请求后，根据host、uri等信息返回指定的内容。一般会保持长链接。</p>
+<h5 id="server端-一般都有CDN节点-响应"><a href="#server端-一般都有CDN节点-响应" class="headerlink" title="server端(一般都有CDN节点)响应"></a>server端(一般都有CDN节点)响应</h5><p>server端(CDN节点)收到http请求后，判断该数据是否有本地未过期的缓存，如果有则直接返回给客户端，如果没有，则向源站发起http请求，收到源站请求后，根据请求头记录缓存时间，并将数据返回给客户端。</p>
 <h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
 <p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
 <p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
@@ -496,7 +496,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -549,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客官请打赏"><span class="nav-number">2.</span> <span class="nav-text">客官请打赏</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#当你在浏览器输入www-baidu-com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点"><span class="nav-number">1.</span> <span class="nav-text">当你在浏览器输入www.baidu.com，按下回车之后发生了什么？从技术的角度尽可能完整的描述技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询DNS信息"><span class="nav-number">1.1.</span> <span class="nav-text">查询DNS信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问该网站"><span class="nav-number">1.2.</span> <span class="nav-text">访问该网站</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tcp建联"><span class="nav-number">1.2.1.</span> <span class="nav-text">tcp建联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-发送get请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">http 发送get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server端-一般都有CDN节点-响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">server端(一般都有CDN节点)响应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客官请打赏"><span class="nav-number">2.</span> <span class="nav-text">客官请打赏</span></a></li></ol></div>
             
 
           </div>
