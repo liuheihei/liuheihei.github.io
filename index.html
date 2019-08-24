@@ -256,6 +256,209 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2019/08/23/反向代理与CDN的区别/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="liuheihei">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/08/23/反向代理与CDN的区别/" itemprop="url">
+                  反向代理与CDN的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2019-08-23T19:23:43+08:00">
+                2019-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/23/反向代理与CDN的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/23/反向代理与CDN的区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="反向代理与CDN的区别"><a href="#反向代理与CDN的区别" class="headerlink" title="反向代理与CDN的区别"></a>反向代理与CDN的区别</h1><p>结论：<br>1: 反向代理是CDN的一个环节。CDN需要各地机房建设、DNS就近分配、反向代理、数据缓存等多个环节。<br>2: 反向代理和CDN应用场景略有不同。</p>
+<h2 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h2><ul>
+<li>RS: Real Server 真实提供响应的服务器。</li>
+</ul>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>反向代理:<br>在计算机网络中，反向代理是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些资源返回给客户端，客户端只会得知反向代理的IP地址，而不知道在代理服务器后面的服务器簇的存在。</li>
+<li>CDN:<br>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</li>
+</ul>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>反向代理：代理服务器来接受客户端的网络访问连接请求，然后服务器将请求有策略的转发给网络中实际工作的业务服务器，并将从业务服务器处理的结果，返回给网络上发起连接请求的客户端。</p>
+<p>CDN： CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。</p>
+<h2 id="异同点"><a href="#异同点" class="headerlink" title="异同点"></a>异同点</h2><ul>
+<li>相同点<ul>
+<li>都可以对网站达到加速的效果</li>
+<li>安全防护<ul>
+<li>隐藏真实服务IP地址</li>
+<li>对攻击者例如DDos、爬虫进行过滤特殊处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>网页加速方式不同<ul>
+<li>反向代理<ul>
+<li>完全不缓存任何资料，只将http请求完整转发给后端多台服务器，由后端服务器响应并返回结果。</li>
+<li>更多情况下是通过负载均衡的方式提供加速。</li>
+</ul>
+</li>
+<li>CDN<ul>
+<li>通过缓存文件的方式就近返回给用户，达到加速的效果，如果全部是动态请求，那么访问速度反而可能会增大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用场景不同<ul>
+<li>反向代理<ol>
+<li>负载均衡</li>
+<li>RS，IP一般是内网IP</li>
+</ol>
+</li>
+<li>CDN<ol>
+<li>偏向于就近响应而非负载均衡</li>
+<li>源站IP必须是公网</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>问题1： 在全国各地部署多个反向代理服务器，并通过DNS智能解析就近分配，这种情况下，与CDN的区别是什么？</p>
+<p>答： 这种情况下，其实就是自己通过反向代理+智能DNS的方式自建了一套CDN系统。一般只有小公司不会这样做，成本太高，（全国各地部署服务器、自建DNS智能解析）</p>
+<p>问题2: 反向代理作为负载均衡转发点，如何保证反向代理服务器不会被打垮？</p>
+<p>答： 反向代理一般是7层负载均衡，如果7层服务器请求量较高，我们会通过类似LVS的方式从4层在进行一次负载。由多台反向代理服务器共同提供服务。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2019/04/30/四月份工作总结/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1172,8 +1375,8 @@
 6: 能知道这件事与自己的联系是什么。
 7: 能对作者提出批评，（没有一本书无懈可击）。
 </code></pre><p><strong>主动阅读必然要问的自己几个问题：</strong></p>
-<pre><code>1: 这本书在谈什么？  一句话或者几句话描述清楚
-2: 这本书作者是怎么讲的？ 找到作者的想法、声明、论点
+<pre><code>1: 这本书在谈什么？  一句话或者几句话描述清楚。
+2: 这本书作者是怎么讲的？ 找到作者的想法、声明、论点。
 3: 这本书那些是对，哪些是错？
 4: 这本书与你的关系是？
 </code></pre><p><strong>如何避免阅读时走神?</strong></p>
@@ -2049,170 +2252,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/01/23/监控的内容/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="liuheihei">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/23/监控的内容/" itemprop="url">
-                  监控相关
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-01-23T22:23:43+08:00">
-                2018-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/23/监控的内容/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/23/监控的内容/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="你们监控系统的监控项有哪些？"><a href="#你们监控系统的监控项有哪些？" class="headerlink" title="你们监控系统的监控项有哪些？"></a>你们监控系统的监控项有哪些？</h2><h3 id="业务相关"><a href="#业务相关" class="headerlink" title="业务相关"></a>业务相关</h3><p>1: nginx的总请求数(count/s)<br>2: nginx http的总请求数(count/s)<br>3: nginx https的总请求数(count/s)<br>4: nginx的各种错误码、4XX、5XX<br>5: nginx平均响应时间<br>6: nginx大于1s/5s的请求数<br>7: logfwdr日志的drop、接收、发送的数量<br>8: load<br>9: tcp连接数</p>
-<h3 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h3><p>在全国多个监测点对各个机房网络质量进行监控。</p>
-<p>1: ping丢包率<br>2: 平均RTT<br>3: 骨干网的链路状态</p>
-<h3 id="外部监控"><a href="#外部监控" class="headerlink" title="外部监控"></a>外部监控</h3><p>在全国各个探测点模拟实际用户请求，对各个节点发起探测，并根据探测结果下线IP or 机房。</p>
-<h3 id="告警升级"><a href="#告警升级" class="headerlink" title="告警升级"></a>告警升级</h3><p>针对重要服务，30分钟内未恢复自动将告警发送至部门主管。</p>
-<h4 id="如何解决数据量过大，监控服务器扛不住问题？"><a href="#如何解决数据量过大，监控服务器扛不住问题？" class="headerlink" title="如何解决数据量过大，监控服务器扛不住问题？"></a>如何解决数据量过大，监控服务器扛不住问题？</h4><p>所有的节点按照agent,将metric数据发送到统一一个域名，交付给kafka,然后将部分有用数据录入influxDB,然后由grafana进行展示。</p>
-<h3 id="客官请打赏"><a href="#客官请打赏" class="headerlink" title="客官请打赏"></a>客官请打赏</h3><p>本人QQ： 378867598</p>
-<p>如果博客中有什么地方错误或者疏漏，请及时联系我。</p>
-<p>支持微信、支付宝打赏 ^_^<br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt22.png" width="50%" height="50%"><br><img src="http://yjsstatic.baidu.com/M01/ff/f1/c7ce99e08bb7f9722e5da0b898bb8e44YUHjFt21.png" width="50%" height="500%"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2255,7 +2299,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2273,7 +2317,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

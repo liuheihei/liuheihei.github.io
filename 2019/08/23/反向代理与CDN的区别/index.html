@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="TCP/IP," />
+  <meta name="keywords" content="别人的问题," />
 
 
 
@@ -84,55 +84,31 @@
 
 
 
-<meta name="description" content="主要内容TCP是面向连接的协议，本章主要介绍以下知识点
+<meta name="description" content="反向代理与CDN的区别结论：1: 反向代理是CDN的一个环节。CDN需要各地机房建设、DNS就近分配、反向代理、数据缓存等多个环节。2: 反向代理和CDN应用场景略有不同。
+名词解释：
+RS: Real Server 真实提供响应的服务器。
 
-tcp三次握手
-tcp四次挥手
-tcp建联超时
-tcp的半打开与半关闭
-tcp状态的变迁
-tcp的同时打开与同时关闭
-tcp 挤压值
-tcp常见选项
-
-三次握手过程
-1.客户初始化一个ISN序号,字段为seq，并发送一个SYN，进入SYN_SEND状态
-2.服务器监听的端口收到syn后，派生一个进程来处理这个请求、将客户的ISN序号加1作为">
+定义
+反向代理:在计算机网络中，反向代理是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP三次握手">
-<meta property="og:url" content="http://liuheihei.github.io/2018/10/01/tcp.ip第十八章、TCP连接的建立与终止/index.html">
+<meta property="og:title" content="反向代理与CDN的区别">
+<meta property="og:url" content="http://liuheihei.github.io/2019/08/23/反向代理与CDN的区别/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="主要内容TCP是面向连接的协议，本章主要介绍以下知识点
+<meta property="og:description" content="反向代理与CDN的区别结论：1: 反向代理是CDN的一个环节。CDN需要各地机房建设、DNS就近分配、反向代理、数据缓存等多个环节。2: 反向代理和CDN应用场景略有不同。
+名词解释：
+RS: Real Server 真实提供响应的服务器。
 
-tcp三次握手
-tcp四次挥手
-tcp建联超时
-tcp的半打开与半关闭
-tcp状态的变迁
-tcp的同时打开与同时关闭
-tcp 挤压值
-tcp常见选项
-
-三次握手过程
-1.客户初始化一个ISN序号,字段为seq，并发送一个SYN，进入SYN_SEND状态
-2.服务器监听的端口收到syn后，派生一个进程来处理这个请求、将客户的ISN序号加1作为">
-<meta property="og:updated_time" content="2018-11-07T14:19:57.000Z">
+定义
+反向代理:在计算机网络中，反向代理是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些">
+<meta property="og:updated_time" content="2019-08-24T15:06:35.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP三次握手">
-<meta name="twitter:description" content="主要内容TCP是面向连接的协议，本章主要介绍以下知识点
+<meta name="twitter:title" content="反向代理与CDN的区别">
+<meta name="twitter:description" content="反向代理与CDN的区别结论：1: 反向代理是CDN的一个环节。CDN需要各地机房建设、DNS就近分配、反向代理、数据缓存等多个环节。2: 反向代理和CDN应用场景略有不同。
+名词解释：
+RS: Real Server 真实提供响应的服务器。
 
-tcp三次握手
-tcp四次挥手
-tcp建联超时
-tcp的半打开与半关闭
-tcp状态的变迁
-tcp的同时打开与同时关闭
-tcp 挤压值
-tcp常见选项
-
-三次握手过程
-1.客户初始化一个ISN序号,字段为seq，并发送一个SYN，进入SYN_SEND状态
-2.服务器监听的端口收到syn后，派生一个进程来处理这个请求、将客户的ISN序号加1作为">
+定义
+反向代理:在计算机网络中，反向代理是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些">
 
 
 
@@ -164,7 +140,7 @@ tcp常见选项
 
 
 
-  <title> TCP三次握手 | Hexo </title>
+  <title> 反向代理与CDN的区别 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -297,7 +273,7 @@ tcp常见选项
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2018/10/01/tcp.ip第十八章、TCP连接的建立与终止/">
+  <link itemprop="mainEntityOfPage" href="http://liuheihei.github.io/2019/08/23/反向代理与CDN的区别/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="liuheihei">
@@ -321,7 +297,7 @@ tcp常见选项
             
             
               
-                TCP三次握手
+                反向代理与CDN的区别
               
             
           </h1>
@@ -336,8 +312,8 @@ tcp常见选项
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-10-01T13:23:43+08:00">
-                2018-10-01
+              <time title="post.created" itemprop="dateCreated datePublished" datetime="2019-08-23T19:23:43+08:00">
+                2019-08-23
               </time>
             
 
@@ -377,8 +353,8 @@ tcp常见选项
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/01/tcp.ip第十八章、TCP连接的建立与终止/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/01/tcp.ip第十八章、TCP连接的建立与终止/" itemprop="commentCount"></span>
+                <a href="/2019/08/23/反向代理与CDN的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/23/反向代理与CDN的区别/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -404,31 +380,60 @@ tcp常见选项
       
 
       
-        <h1 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h1><p>TCP是面向连接的协议，本章主要介绍以下知识点</p>
-<ul>
-<li>tcp三次握手</li>
-<li>tcp四次挥手</li>
-<li>tcp建联超时</li>
-<li>tcp的半打开与半关闭</li>
-<li>tcp状态的变迁</li>
-<li>tcp的同时打开与同时关闭</li>
-<li>tcp 挤压值</li>
-<li>tcp常见选项</li>
+        <h1 id="反向代理与CDN的区别"><a href="#反向代理与CDN的区别" class="headerlink" title="反向代理与CDN的区别"></a>反向代理与CDN的区别</h1><p>结论：<br>1: 反向代理是CDN的一个环节。CDN需要各地机房建设、DNS就近分配、反向代理、数据缓存等多个环节。<br>2: 反向代理和CDN应用场景略有不同。</p>
+<h2 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h2><ul>
+<li>RS: Real Server 真实提供响应的服务器。</li>
 </ul>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><strong>过程</strong></p>
-<pre><code>1.客户初始化一个ISN序号,字段为seq，并发送一个SYN，进入SYN_SEND状态
-2.服务器监听的端口收到syn后，派生一个进程来处理这个请求、将客户的ISN序号加1作为ACK序号、并且生成自己的ISN序号，发送给客户端，此时服务器进入SYN_RECV状态
-3.客户机收到服务器端发送的ACK与SYN后，会先验证ACK中的序号是否正确，通过后，将回复ACK，以及服务器发送ISN+1的序号。
-</code></pre><p><strong>期间主要协商的内容：</strong></p>
-<pre><code>1. 最大报文段长度 （MSS）
-2. TCP窗口大小 （WIN）
-</code></pre><h4 id="最大报文段长度"><a href="#最大报文段长度" class="headerlink" title="最大报文段长度"></a>最大报文段长度</h4><p>最大报文段长度： 表示TCP传往另一端的最大块数据的大小，MSS只能出现在SYN报文端中，为了防止数据分段、两端在三次握手时，按照MSS最小值来发送数据。</p>
-<p><strong>听起来，MSS越大越好，因为MSS越大，单次发送的数据报文长度就越大。但实时上并不是这样。 原因：</strong></p>
-<p>24-2， 24-3 (大分组还是小分租中。未理解)</p>
-<h4 id="TCP窗口大小"><a href="#TCP窗口大小" class="headerlink" title="TCP窗口大小"></a>TCP窗口大小</h4><p>TCP窗口代表的是数据发送方，在未收到数据ack情况下，最多可以发送的数据，(<em>称之为窗口的原因是由于当发送端收到ack后，可以发送的数据分组就会向后移进入窗口，可以被发送方发送，从图表上理解，比较像窗户</em>)</p>
-<p><strong>问题：窗口的大小是如何确定?为什么不是按照两者的最小值？<br>抓包发现，客户端窗口为65535，服务器端为29200，为什么最后的ack窗口大小为8192。而且，后续发送数据最大的窗口也没有超过8192？</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">15:38:46.928607 IP 192.168.31.140.61293 &gt; no-data.http: Flags [S], seq 1251625547, win 65535, options [mss 1460,nop,wscale 5,nop,nop,TS val 2458677952 ecr 0,sackOK,eol], length 0</div><div class="line">Pd+...L2u.....E..@..@.@.......&#125;&apos;...m.PJ.JK.......................</div><div class="line">..r.........</div><div class="line">15:38:46.966157 IP no-data.http &gt; 192.168.31.140.61293: Flags [S.], seq 556993510, ack 1251625548, win 29200, options [mss 1440,nop,nop,sackOK,nop,wscale 10], length 0</div><div class="line">L2u...Pd+.....E..4..@.1.&gt;g&#125;&apos;.......P.m!3..J.JL..r.?..............</div><div class="line"></div><div class="line">15:38:46.966222 IP 192.168.31.140.61293 &gt; no-data.http: Flags [.], ack 1, win 8192, length 0</div><div class="line">Pd+...L2u.....E..(..@.@..&#123;....&#125;&apos;...m.PJ.JL!3..P. .....</div></pre></td></tr></table></figure></p>
-<h4 id="初始化序号ISN"><a href="#初始化序号ISN" class="headerlink" title="初始化序号ISN"></a>初始化序号ISN</h4><p>该序号在系统初始化是被设置为1，并每4ms加1，如果没有新建立的连接那么每9.5小时后回到0，每建立一个新的tcp连接，改变量将增加64000</p>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>反向代理:<br>在计算机网络中，反向代理是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些资源返回给客户端，客户端只会得知反向代理的IP地址，而不知道在代理服务器后面的服务器簇的存在。</li>
+<li>CDN:<br>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</li>
+</ul>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>反向代理：代理服务器来接受客户端的网络访问连接请求，然后服务器将请求有策略的转发给网络中实际工作的业务服务器，并将从业务服务器处理的结果，返回给网络上发起连接请求的客户端。</p>
+<p>CDN： CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。</p>
+<h2 id="异同点"><a href="#异同点" class="headerlink" title="异同点"></a>异同点</h2><ul>
+<li>相同点<ul>
+<li>都可以对网站达到加速的效果</li>
+<li>安全防护<ul>
+<li>隐藏真实服务IP地址</li>
+<li>对攻击者例如DDos、爬虫进行过滤特殊处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>网页加速方式不同<ul>
+<li>反向代理<ul>
+<li>完全不缓存任何资料，只将http请求完整转发给后端多台服务器，由后端服务器响应并返回结果。</li>
+<li>更多情况下是通过负载均衡的方式提供加速。</li>
+</ul>
+</li>
+<li>CDN<ul>
+<li>通过缓存文件的方式就近返回给用户，达到加速的效果，如果全部是动态请求，那么访问速度反而可能会增大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用场景不同<ul>
+<li>反向代理<ol>
+<li>负载均衡</li>
+<li>RS，IP一般是内网IP</li>
+</ol>
+</li>
+<li>CDN<ol>
+<li>偏向于就近响应而非负载均衡</li>
+<li>源站IP必须是公网</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>问题1： 在全国各地部署多个反向代理服务器，并通过DNS智能解析就近分配，这种情况下，与CDN的区别是什么？</p>
+<p>答： 这种情况下，其实就是自己通过反向代理+智能DNS的方式自建了一套CDN系统。一般只有小公司不会这样做，成本太高，（全国各地部署服务器、自建DNS智能解析）</p>
+<p>问题2: 反向代理作为负载均衡转发点，如何保证反向代理服务器不会被打垮？</p>
+<p>答： 反向代理一般是7层负载均衡，如果7层服务器请求量较高，我们会通过类似LVS的方式从4层在进行一次负载。由多台反向代理服务器共同提供服务。</p>
+
       
     </div>
 
@@ -451,7 +456,7 @@ tcp常见选项
       
         <div class="post-tags">
           
-            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+            <a href="/tags/别人的问题/" rel="tag"># 别人的问题</a>
           
         </div>
       
@@ -460,8 +465,8 @@ tcp常见选项
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/28/TCP backlog/" rel="next" title="TCP Backlog">
-                <i class="fa fa-chevron-left"></i> TCP Backlog
+              <a href="/2019/04/30/四月份工作总结/" rel="next" title="《2019-04月工作总结》">
+                <i class="fa fa-chevron-left"></i> 《2019-04月工作总结》
               </a>
             
           </div>
@@ -469,10 +474,6 @@ tcp常见选项
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/03/如何阅读一本书 读后感/" rel="prev" title="如何阅读一本书读后感">
-                如何阅读一本书读后感 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +603,7 @@ tcp常见选项
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">1.0.1.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大报文段长度"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">最大报文段长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP窗口大小"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">TCP窗口大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化序号ISN"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">初始化序号ISN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">1.0.2.</span> <span class="nav-text">四次挥手</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反向代理与CDN的区别"><span class="nav-number">1.</span> <span class="nav-text">反向代理与CDN的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释："><span class="nav-number">1.1.</span> <span class="nav-text">名词解释：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">1.3.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异同点"><span class="nav-number">1.4.</span> <span class="nav-text">异同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.5.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -715,9 +716,9 @@ tcp常见选项
 
     <script type="text/javascript">
       var disqus_shortname = 'disqus_HU2NHxcrK3';
-      var disqus_identifier = '2018/10/01/tcp.ip第十八章、TCP连接的建立与终止/';
+      var disqus_identifier = '2019/08/23/反向代理与CDN的区别/';
 
-      var disqus_title = "TCP三次握手";
+      var disqus_title = "反向代理与CDN的区别";
 
 
       function run_disqus_script(disqus_script) {
